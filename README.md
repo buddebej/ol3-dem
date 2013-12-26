@@ -11,9 +11,11 @@ Features at current stage:
  * Waterbody Detection
  * Hillshading
 
-Ordinary raster dems such as GeoTif can be used. The input data has to be encoded and converted into a set of tiles before it can be read by ol3. 
+The input data has to be encoded and converted into a set of tiles before it can be read by ol3. Regular raster dems such as GeoTiff can be used.
 
 A [working demo](http://ol3dem.boeppe.eu/) is currently available for the eu-dem (Digital Elevation Model of the European Environment Agency).
 
 Click here for working demo [http://ol3dem.boeppe.eu/](http://ol3dem.boeppe.eu/)
+Works best in chrome and make sure your browser allows webgl.
 
+![Screenshots](http://ol3dem.boeppe.eu/ol3-dem-screenshot.png) 
