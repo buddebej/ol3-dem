@@ -1,0 +1,1346 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"freezeRendering",
+				"freezeRenderingCount_"
+			],
+			[
+				"backg",
+				"background"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"font-",
+				"font-family"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"u_",
+				"u_zoomLevel"
+			],
+			[
+				"v_",
+				"v_zoomLevel"
+			],
+			[
+				"stroke-",
+				"stroke-opacity"
+			],
+			[
+				"arr",
+				"arrowsToDraw ([])"
+			],
+			[
+				"get",
+				"getCountries"
+			],
+			[
+				"a",
+				"arrowStyle (obj)"
+			],
+			[
+				"$country",
+				"$countrySet (?)"
+			],
+			[
+				"dra",
+				"drawFlow"
+			],
+			[
+				"width",
+				"width"
+			],
+			[
+				"att",
+				"attributes"
+			],
+			[
+				"country",
+				"countryCode"
+			],
+			[
+				"unifo",
+				"uniform4fv	(?)"
+			],
+			[
+				"create",
+				"createFloat32"
+			],
+			[
+				"min",
+				"min"
+			],
+			[
+				"sha",
+				"shaderProjectionMatrixUniform"
+			],
+			[
+				"pro",
+				"projectionMatrix	(?)"
+			],
+			[
+				"ver",
+				"vertexPos"
+			],
+			[
+				"Del",
+				"DeltaPsi"
+			],
+			[
+				"Delta",
+				"DeltaPsi_II"
+			],
+			[
+				"DeltaP",
+				"DeltaPsi_I"
+			],
+			[
+				"ga",
+				"geom_accuracy"
+			],
+			[
+				"Clas",
+				"ClassifierJenks"
+			],
+			[
+				"range",
+				"rangePopdens"
+			],
+			[
+				"POPDENS",
+				"popdens"
+			],
+			[
+				"ge",
+				"getAvgmin"
+			],
+			[
+				"getA",
+				"getAvgmax"
+			],
+			[
+				"geo",
+				"geometry"
+			],
+			[
+				"set",
+				"setTemp"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "gdal_tiler.py",
+			"settings":
+			{
+				"buffer_size": 7462,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tiler_backend.py",
+			"settings":
+			{
+				"buffer_size": 44804,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "reader_backend.py",
+			"settings":
+			{
+				"buffer_size": 11706,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tiler_misc.py",
+			"settings":
+			{
+				"buffer_size": 2606,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tiler_functions.py",
+			"settings":
+			{
+				"buffer_size": 16603,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 331.0,
+		"selected_items":
+		[
+			[
+				"Package Con",
+				"Package Control: Install Package"
+			],
+			[
+				"Pac",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"Pack",
+				"Package Control: Install Package"
+			],
+			[
+				"P",
+				"Package Control: Remove Package"
+			],
+			[
+				"Packae",
+				"Package Control: Remove Package"
+			],
+			[
+				"Packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Co",
+				"Package Control: Remove Package"
+			],
+			[
+				"Packa Control",
+				"Package Control: Remove Package"
+			],
+			[
+				"Packa Control: Rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: Install ",
+				"Package Control: Install Package"
+			],
+			[
+				"JSH",
+				"JSHint"
+			],
+			[
+				"Package",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Pak",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 512.0
+	},
+	"console":
+	{
+		"height": 50.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/jolloux/lab/localhost/planoblique/planoblique-init.js",
+		"/home/jolloux/lab/color_encode_dem/tilers-tools/tilers_tools/test/tileset-v4/eudem_dem_5deg_n45e015_webmercator.zyx/tilemap.json",
+		"/home/jolloux/lab/localhost/planoblique/data/eu-dem-tiler-tools/tilemap.json",
+		"/run/media/jolloux/4D444BE9407CFDA4/eu-dem/tile-urls.txt",
+		"/home/jolloux/lab/color_encode_dem/tilers-tools/tilers_tools/tiles_convert.py",
+		"/home/jolloux/lab/color_encode_dem/tilers-tools/tilers_tools/README.md",
+		"/home/jolloux/lab/color_encode_dem/tilers-tools/test/gdal_tiler.py",
+		"/home/jolloux/lab/color_encode_dem/eu-dem-downloader",
+		"/home/jolloux/lab/color_encode_dem/eu-dem/tile-urls.txt",
+		"/home/jolloux/.config/sublime-text-2/Packages/User/Main.sublime-menu",
+		"/home/jolloux/.config/sublime-text-2/Packages/User/filter-strings.py",
+		"/home/jolloux/misc/vbox/win-share/CS6 DesignStd 1/serial",
+		"/home/jolloux/script/mount-crypto-lvm.sh",
+		"/home/jolloux/doku/Artikel/linx/cryptoluks-mount",
+		"/home/jolloux/doku/Artikel/linx/mount-lvm-crypto",
+		"/home/jolloux/script/backup-home.sh",
+		"/home/jolloux/doku/Artikel/linx/festplatten-workaround",
+		"/home/jolloux/lab/color_encode_dem/workflow-doku",
+		"/home/jolloux/lab/localhost/planoblique/ol3/build.py",
+		"/home/jolloux/lab/localhost/planoblique/ol3/apidoc/index.md",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol.jsdoc",
+		"/home/jolloux/lab/plan-oblique-ol3/doku/steps",
+		"/home/jolloux/lab/encode_dem/workflow-doku",
+		"/home/jolloux/lab/localhost/advent/app/js/advent.js",
+		"/home/jolloux/afpfs-ng-0.8.1/INSTALL",
+		"/run/user/1000/gvfs/sftp:host=boeppe.eu,port=50000,user=sergej/var/www1/planoblique/planoblique-init.js",
+		"/home/jolloux/lab/encode_dem/potsdam/dem2png.py",
+		"/home/jolloux/lab/encode_dem/dem2png.py",
+		"/home/jolloux/lab/encode_dem/srtm-craterlake/dem2png.py",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol/renderer/webgl/webglmaprenderer.js",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol/renderer/webgl/webgllayerrenderer.js",
+		"/home/jolloux/lab/plan-oblique-ol3/klokan-tiles-metadata/ReadMe.txt",
+		"/home/jolloux/lab/plan-oblique-ol3/setup dev env",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol/renderer/webgl/webgltilelayerrenderer.js",
+		"/home/jolloux/lab/encode_dem/srtm-craterlake/srtm_12_04.tfw",
+		"/home/jolloux/lab/plan-oblique-ol3/data/ReadMe.txt",
+		"/home/jolloux/lab/geo599/HypsoTints/data/Engadin.asc",
+		"/home/jolloux/lab/localhost/planoblique/ol3/doc/index.hbs",
+		"/tmp/webgltilelayer-7.glsl",
+		"/home/jolloux/lab/plan-oblique-ol3/docu/steps",
+		"/home/jolloux/lab/plan-oblique-ol3/docu/shader.mustache",
+		"/home/jolloux/lab/localhost/advent/app/pathEditor/advent-editor.css",
+		"/home/jolloux/lab/localhost/advent/app/pathEditor/advent-editor.js",
+		"/home/jolloux/lab/plan-oblique-ol3/old/ol3/src/ol/renderer/webgl/webgltilelayerrenderer.js",
+		"/tmp/webgltilelayer-5.glsl",
+		"/tmp/webgltilelayer-6.glsl",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol/webgl/shader.mustache",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol/renderer/webgl/webgltilelayershader.js",
+		"/tmp/webgltilelayer-4.glsl",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol/renderer/webgl/webglmapdefault.glsl",
+		"/tmp/webgltilelayer-2.glsl",
+		"/tmp/webgltilelayer-3.glsl",
+		"/tmp/webgltilelayer-1.glsl",
+		"/home/jolloux/lab/localhost/mapugee2/init.js",
+		"/home/jolloux/lab/localhost/mapugee2/css/mapugee.css",
+		"/home/jolloux/lab/localhost/mapugee2/css/mapstyle.css",
+		"/home/jolloux/lab/localhost/mapugee2/index.html",
+		"/tmp/webgltilelayer.glsl",
+		"/home/jolloux/lab/localhost/mapugee2/lib/mapugee.js",
+		"/home/jolloux/.config/sublime-text-2/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/jolloux/lab/localhost/advent/app/data/2.json",
+		"/home/jolloux/lab/localhost/advent/app/index.html",
+		"/home/jolloux/lab/localhost/advent/app/advent.js",
+		"/home/jolloux/lab/localhost/advent/app/pathEditor/index.html",
+		"/home/jolloux/lab/localhost/advent/app/countdown.css",
+		"/run/user/1000/gvfs/sftp:host=boeppe.eu,port=50000,user=sergej/var/www/nelefant/write.php",
+		"/run/user/1000/gvfs/sftp:host=boeppe.eu,port=50000,user=sergej/var/www/nelefant/data/testFile.txt",
+		"/run/user/1000/gvfs/sftp:host=boeppe.eu,port=50000,user=sergej/var/www/nelefant/data/write.php",
+		"/home/jolloux/lab/localhost/advent/app/css/advent.css",
+		"/home/jolloux/lab/localhost/advent/app/advent.css",
+		"/home/jolloux/lab/localhost/advent/app/jquery.countdown.css",
+		"/home/jolloux/lab/localhost/advent/app/advent-min.js",
+		"/home/jolloux/lab/localhost/advent/app/jquery-panzoom.js",
+		"/home/jolloux/lab/localhost/advent/app (copy)/advent.js",
+		"/home/jolloux/lab/localhost/advent/app/snowfall.js",
+		"/home/jolloux/lab/localhost/advent/app/data/1.json",
+		"/var/www/localhost/htdocs/advent/app/snowfall.js",
+		"/home/jolloux/lab/localhost/advent/app/data/5.json",
+		"/home/jolloux/lab/localhost/advent/app/data/3.json",
+		"/home/jolloux/lab/localhost/advent/app/data/4.json",
+		"/home/jolloux/doku/Artikel/linx/file-batch-rename",
+		"/home/jolloux/lab/localhost/advent/app/pathEditor/json-lib.js",
+		"/home/jolloux/Downloads/jquery.json-2.4.min.js",
+		"/home/jolloux/lab/localhost/advent/app/jquery-2.0.3.min.js",
+		"/home/jolloux/adentskal/app/advent.js",
+		"/home/jolloux/adentskal/app/pathEditor/advent-editor.js",
+		"/home/jolloux/adentskal/app/pathEditor/advent-editor.css",
+		"/home/jolloux/adentskal/app/pathEditor/index.html",
+		"/home/jolloux/adentskal/app/advent-editor.css",
+		"/home/jolloux/adentskal/app/data/1.json",
+		"/home/jolloux/adentskal/app/data/2.json",
+		"/home/jolloux/adentskal/app/index.html",
+		"/home/jolloux/adentskal/app/jquery-panzoom.js",
+		"/home/jolloux/adentskal/app/jQuery-PanZoom/README.md",
+		"/home/jolloux/adentskal/app/data/3.json",
+		"/home/jolloux/adentskal/app/test.html",
+		"/home/jolloux/adentskal/app/blur.js",
+		"/home/jolloux/.cache/.fr-ht5Mkp/tree_bark/readme.txt",
+		"/home/jolloux/webgltilelayer.glsl",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol/renderer/webgl/webgltilelayer.glsl",
+		"/home/jolloux/doku/Artikel/linx/iphone on sabayon",
+		"/home/jolloux/lab/localhost/mapugee2/data/dbrequest.php",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol/layer/layerbase.js",
+		"/home/jolloux/lab/localhost/planoblique/ol3/src/ol/map.js",
+		"/home/jolloux/lab/localhost/planoblique/index.html",
+		"/home/jolloux/lab/localhost/closure/index.html",
+		"/home/jolloux/lab/localhost/closure/init.js",
+		"/home/jolloux/lab/localhost/closure/plovr.js",
+		"/home/jolloux/lab/localhost/closure/d3_externs.js",
+		"/home/jolloux/.cache/.fr-ylDI6H/d3-externs-master/d3_externs.js",
+		"/home/jolloux/lab/localhost/closure/us.js",
+		"/home/jolloux/apps/closure/tutorials/02-templates/hello.js",
+		"/home/jolloux/lab/localhost/mapugee2/srre.html",
+		"/home/jolloux/apps/closure/tutorials/03-templates/compiler-commands",
+		"/home/jolloux/lab/localhost/planoblique/srtmWebgl.js",
+		"/home/jolloux/apps/closure/tutorials/03-templates/hello.js",
+		"/home/jolloux/apps/closure/tutorials/03-templates/hello.html",
+		"/home/jolloux/apps/closure/tutorials/02-templates/hello.soy.js",
+		"/home/jolloux/apps/closure/tutorials/02-templates/hello-compiled.js",
+		"/home/jolloux/apps/closure/tutorials/02-templates/hello-compiled.html",
+		"/home/jolloux/apps/closure/tutorials/02-templates/hello.html",
+		"/home/jolloux/apps/closure/tutorials/02-templates/hello-deps.js",
+		"/home/jolloux/apps/closure/tutorials/02-templates/hello.soy",
+		"/home/jolloux/brot",
+		"/home/jolloux/teresie-adresse",
+		"/home/jolloux/apps/closure/tutorials/02-templates/compiler-commands",
+		"/home/jolloux/apps/closure/tutorials/01-hello-world/hello.js",
+		"/home/jolloux/.config/sublime-text-2/Packages/JsFormat/JsFormat.sublime-settings"
+	],
+	"find":
+	{
+		"height": 44.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Pyramid",
+			"frombuffer",
+			"get_tile",
+			"BaseImg",
+			"self.base_img.get_tile",
+			"self.BaseImg",
+			"BaseImg",
+			"BaeImg",
+			"image",
+			"BaseImg",
+			"warp_vrt",
+			"dataType",
+			"print",
+			"init_map",
+			"get_src_ds",
+			"band",
+			"self.tile_ext",
+			"save",
+			"256",
+			"color",
+			"png",
+			"tif",
+			"png",
+			"'.png'\n",
+			"tile_ext",
+			"opt.tile_ext",
+			"format",
+			"self.palette",
+			"self.max_zoom",
+			"override_srs",
+			"dst_proj",
+			"self.opt",
+			"rgb",
+			"print",
+			"covert",
+			"gdal",
+			"Image",
+			"convert",
+			"write_tile",
+			"512",
+			"mkdir",
+			"(n.*)",
+			"n30e030",
+			"(n.*)",
+			"mkdir",
+			"eudem_dem_5deg_",
+			".tif",
+			"http://published-files.eea.europa.eu/eudem/entr_r_4258_1_arcsec_gsgrda-eudem-dem-europe_2012_rev1/eudem_tiles_5deg/",
+			"wget",
+			"http://",
+			"\"class=\".*",
+			" ",
+			"<a href=\"",
+			".\\K(href.*)",
+			"(.*)|(href.*)",
+			"(href.*)|(.*)",
+			"(.*)(href.*)",
+			"(.*)|(href.*)",
+			"(.)|(href.*)",
+			"(.)(href.*)(.)",
+			".|(href.*)",
+			"(?(href.*)a|b)",
+			"(?(href.*).|.)",
+			"?<=(href.*)",
+			"\\p{a}",
+			"(?href.*)",
+			"(!href.*)",
+			"(?href.*)",
+			"*.(?=href.*)",
+			".(?=href.*)",
+			"(?=href.*)",
+			"href.*^",
+			".",
+			"$de",
+			".",
+			"(*).(href=.*).*()",
+			"interactions",
+			"optionsInternal",
+			"optionsInternal.values",
+			"animate",
+			"SIZE",
+			"rerender",
+			".render",
+			"render",
+			"animationDelay_",
+			"AnimationDelay",
+			"animationDelay_",
+			"setValues",
+			"render",
+			"getTarget",
+			"render",
+			"render()",
+			"rerender",
+			"renderFrame_",
+			"rerender",
+			"viewPropertyListenerKey_",
+			"render",
+			"mapBrowserEvent",
+			"getInteractions()",
+			"handleMapBrowserEvent",
+			"this.frameState_",
+			"view",
+			"handleViewChanged_",
+			"rerendering",
+			"rerender",
+			"jsdoc",
+			"jsodc",
+			"jsdoc",
+			"\"",
+			"tilerenderer",
+			"bindTileTexture",
+			"depth",
+			"LINEAR",
+			"indexBuffer",
+			"vertexBuffer",
+			"getTileLayer",
+			"disposeInternal",
+			"hypocColor",
+			"u_cellSize",
+			"null",
+			"precision",
+			"u_tiletest",
+			"u_tileSizeM",
+			"v_tileSizeM",
+			"texture",
+			"setOverlaySize",
+			"_jsonZoomPath",
+			"hide"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"cd .. \\n mkdir",
+			"$1 \\ncd $1 \\nwget http://published-files.eea.europa.eu/eudem/entr_r_4258_1_arcsec_gsgrda-eudem-dem-europe_2012_rev1/eudem_tiles_5deg/eudem_dem_5deg_$1.tif",
+			"mkdir $1 \\ncd $1 \\nwget http://published-files.eea.europa.eu/eudem/entr_r_4258_1_arcsec_gsgrda-eudem-dem-europe_2012_rev1/eudem_tiles_5deg/eudem_dem_5deg_$1",
+			"mkdir $1 \\n cd $1 \\n wget ",
+			"wget",
+			"",
+			"mkdir",
+			"wget http://",
+			"",
+			"$1",
+			"$0",
+			"$1",
+			"$2",
+			"$1",
+			"$0",
+			"$1",
+			"x",
+			"j",
+			"$2",
+			"'",
+			"hypsoColor",
+			"CELLSIZE",
+			"u_tileSizeM",
+			"'",
+			"_pathParam",
+			"_jsonZoomPath",
+			"_player",
+			"_overlay",
+			"_zoomPath",
+			"ZoomPath",
+			"_cover",
+			"DAYS",
+			"AUDIO_URL",
+			"IMG_URL",
+			"AUDIO_URL",
+			"IMGURL",
+			"scrollToActiveCell",
+			"getDayJson",
+			"setOverlaySize",
+			"expandDayCell",
+			"collapseDayCell",
+			"hoverDayOut",
+			"hoverDayIn",
+			"getCurrentDay",
+			"addAudioSrc",
+			"$absY",
+			"$absX",
+			"$relX",
+			"$relY",
+			"'",
+			"offset",
+			"'",
+			"','",
+			"',",
+			" : '.jpg',",
+			"u_tileSizeM",
+			"encElevRight",
+			"encElevBelow",
+			"neighbourBelow",
+			"neighbourRight",
+			",255,",
+			",",
+			"255,",
+			",",
+			",\n",
+			",255,\n",
+			",",
+			",255,\n,",
+			",255,\n",
+			",\n",
+			"\n",
+			"\\n",
+			"/n",
+			"",
+			"encElev",
+			"$features",
+			"'",
+			"origin",
+			"orig_country_code",
+			"orig_country",
+			"-1",
+			"99999",
+			"'",
+			"$1],[$2",
+			"$1],[",
+			"],[",
+			"$1],[$2",
+			"$1],[[0-9]",
+			"$1],[[$2",
+			"[0-9]],[[0-9]",
+			"[0-9]],[0-9]",
+			"[0-9]],[[0-9]",
+			": [[",
+			"]],",
+			"],",
+			"]",
+			"],[",
+			": [",
+			"[",
+			": ",
+			": [",
+			"\\n",
+			"",
+			"tileSizeM",
+			"cell",
+			"feature",
+			"'",
+			"(r <=",
+			"queryParam",
+			"\",\"",
+			",",
+			"Arrow",
+			"'",
+			",255,\\n",
+			",",
+			",255",
+			",",
+			"tValue",
+			"cb",
+			",",
+			".",
+			"",
+			",255,",
+			",",
+			",255,",
+			"",
+			"startdate",
+			"initBSlider()"
+		],
+		"reverse": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "gdal_tiler.py",
+					"settings":
+					{
+						"buffer_size": 7462,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5578,
+								5578
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "fill",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1235.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "tiler_backend.py",
+					"settings":
+					{
+						"buffer_size": 44804,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								30300,
+								30300
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "fill",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 10139.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "reader_backend.py",
+					"settings":
+					{
+						"buffer_size": 11706,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "fill",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4410.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "tiler_misc.py",
+					"settings":
+					{
+						"buffer_size": 2606,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1320,
+								1320
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "fill",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 549.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "tiler_functions.py",
+					"settings":
+					{
+						"buffer_size": 16603,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16410,
+								16410
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "fill",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": true,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6789.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 30.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 74.0
+	},
+	"output.jslint_result_view":
+	{
+		"height": 25.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/home/jolloux/lab/localhost/mapugee2/mapugee2.project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}
