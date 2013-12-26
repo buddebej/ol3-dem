@@ -2,7 +2,7 @@ ol3-dem
 =========
 
 This is an experimental fork of OpenLayers 3 to render digital elevation models using the integrated webgl functionality.
-The application is not running stable yet and serves only testing purposes. 
+The application is not running stable yet and serves only testing purposes. There are still some major problems and artefacts.
 For comments or contribution please contact [Cartography and Geovisualization Group, Oregon State University](http://cartography.oregonstate.edu/).
 
 Features at current stage:
