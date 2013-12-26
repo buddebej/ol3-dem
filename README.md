@@ -1,4 +1,4 @@
-ol3js-dem
+ol3-dem
 =========
 
 This is a experimental fork of OpenLayers 3 to render digital elevation models using the integrated webgl shader.
