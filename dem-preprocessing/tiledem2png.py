@@ -153,7 +153,7 @@ def extant_file(x):
 
 def parseArguements():
     # Argument Parser
-    parser = argparse.ArgumentParser(description='Landis2Vis')
+    parser = argparse.ArgumentParser(description='tiledem2png')
     
     # projectfile Option
     parser.add_argument( "tmsfolder", type=extant_folder, nargs='+',
