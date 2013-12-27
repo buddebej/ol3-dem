@@ -10,7 +10,7 @@ class Dem2Png:
 
         pass
 
-    def process(self, in_fn, in_zxy, out_fn):
+    def process(self, in_fn, in_zxy, out_fn, tilescheme):
        #print in_fn
 
        #Open Map
@@ -19,7 +19,7 @@ class Dem2Png:
        #print "openDataset:", time.time() - start
 
        start = time.time()      
-       self.createOutputDataset(self.getTileNeighbours(in_zxy))
+       self.createOutputDataset(self.getTileNeighbours(in_zxy,tilescheme))
        #print "createOutputDataset:", time.time() - start
 
        start = time.time()  
@@ -45,7 +45,7 @@ class Dem2Png:
         #Set NoData
         self.in_band_1.SetNoDataValue(-500)
 
-    def getTileNeighbours(self, in_zxy):
+    def getTileNeighbours(self, in_zxy, tilescheme):
         root=in_zxy[0] # contains z
         x=int(in_zxy[1])
         y=int(in_zxy[2])
@@ -53,16 +53,26 @@ class Dem2Png:
         #   NW  N  NE 
         #   W   X  E
         #   SW  S  SE 
-
+	if tilescheme == 'tms':
         # path to tile in tms (root,x,y), offsett x, offset y, nbr  of pixel in x and y direction
-        NW = [root,x-1,y+1,255,255,1,1]
-        N = [root,x,y+1,0,255,256,1]
-        NE = [root,x+1,y+1,0,255,1,1]
-        E = [root,x+1,y,0,0,1,256]
-        SE = [root,x+1,y-1,0,0,1,1]
-        S = [root,x,y-1,0,0,256,1]
-        SW = [root,x-1,y-1,255,0,1,1]
-        W = [root,x-1,y,255,0,1,256] 
+		NW = [root,x-1,y+1,255,255,1,1]
+		N = [root,x,y+1,0,255,256,1]
+		NE = [root,x+1,y+1,0,255,1,1]
+		E = [root,x+1,y,0,0,1,256]
+		SE = [root,x+1,y-1,0,0,1,1]
+		S = [root,x,y-1,0,0,256,1]
+		SW = [root,x-1,y-1,255,0,1,1]
+		W = [root,x-1,y,255,0,1,256] 
+	else:
+		NW = [root,x-1,y-1,255,255,1,1]
+		N = [root,x,y-1,0,255,256,1]
+		NE = [root,x+1,y-1,0,255,1,1]
+		E = [root,x+1,y,0,0,1,256]
+		SE = [root,x+1,y+1,0,0,1,1]
+		S = [root,x,y+1,0,0,256,1]
+		SW = [root,x-1,y+1,255,0,1,1]
+		W = [root,x-1,y,255,0,1,256] 
+		
         neighbourValues = [] 
         for n in [N,S,E,W,NW,NE,SE,SW]:
             neighbourValues.append(self.getNeighbourValues(n))
@@ -208,19 +218,23 @@ def extant_file(x):
 
 def parseArguments():
     # Argument Parser
-    parser = argparse.ArgumentParser(description='Landis2Vis')
+    parser = argparse.ArgumentParser(description='Tiles get to know their neighbours.')
     
     # projectfile Option
     parser.add_argument( "tmsfolder", type=extant_folder, nargs='+',
         help="Tile Map Service Folder ", metavar="TMS FOLDER")    
+       
+    parser.add_argument( "tilescheme", type=str, default='xyz', help="Set tile scheme [tms or xyz]", metavar="TILE SCHEME")    
        
     return parser.parse_args()
 
 def main():
 
     args = parseArguments()
+    tilescheme = args.tilescheme
     print 'getToKnowTheNeighbours (borderline)'
     print args.tmsfolder
+    print tilescheme
 
     rootPath = args.tmsfolder[0]
     pattern = '*.tif'
@@ -247,7 +261,7 @@ def main():
             outputFile = os.path.join(f, z, x, y + '.tif')
             #print inputFile, outputFile
             
-            _Dem2Png.process(inputFile, zxy, outputFile)
+            _Dem2Png.process(inputFile, zxy, outputFile, tilescheme)
 
 if __name__ == '__main__':
     main()   
