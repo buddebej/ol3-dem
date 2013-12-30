@@ -7,7 +7,8 @@ from math import ceil
 
 class EncoderCore:
 
-    def __init__(self):
+    def __init__(self,noData):
+        self.noData = float(noData)
         pass
 
     def process(self, in_fn, out_fn):
@@ -27,7 +28,7 @@ class EncoderCore:
             return -1
 
         self.in_band_1 = self.in_ds.GetRasterBand(1)
-        self.in_band_1.SetNoDataValue(-500)
+        self.in_band_1.SetNoDataValue(self.noData)
 
         blockSizes = self.in_band_1.GetBlockSize()
 
@@ -121,8 +122,9 @@ class EncoderCore:
         export_ds = None
 
 class ColorEncoder:
-    def __init__(self,rootPath,multiThread,mThreads,mBuffer):
+    def __init__(self,rootPath,noData,multiThread,mThreads,mBuffer):
         self.rootPath = rootPath
+        self.noData = noData
         self.multiThread = multiThread
         self.mThreads = mThreads
         self.mBuffer = mBuffer        
@@ -141,7 +143,7 @@ class ColorEncoder:
             maxThreads=int(self.mThreads)
             bufferSize=int(self.mBuffer)
             # create instance of core class
-            _EncoderCore=EncoderCore()
+            _EncoderCore=EncoderCore(self.noData)
 
         # walk directory
         for root, dirs, files in os.walk(self.rootPath):
@@ -177,7 +179,7 @@ class ColorEncoder:
                         j+=1
                 else:
                     # start computing for each single file (takes forever!)
-                    EncoderCore().process(inputFile, outputFile)
+                    EncoderCore(self.noData).process(inputFile, outputFile)
 
         if self.multiThread:
                 # should be done in a nicer way
@@ -226,7 +228,8 @@ def parseArguments():
     parser.add_argument( "tileinput", type=extant_folder, nargs='+',help="Input tiles", metavar="TMS FOLDER")    
     parser.add_argument('-m','--multithread', help='If set, multithreading is deactivated (default true).',required=False, action='store_false')    
     parser.add_argument('-t','--threads', help='Number of threads (4). This functionality is only experimental',required=False)      
-    parser.add_argument('-b','--buffer', help='Number of tiles in buffer (300).This functionality is only experimental',required=False)      
+    parser.add_argument('-b','--buffer', help='Number of tiles in buffer (300).This functionality is only experimental',required=False)   
+    parser.add_argument('-n','--dstnodata', help='Nodata value in tiles (default -500).',required=False)   
     return parser.parse_args()
 
 def main():
@@ -236,18 +239,13 @@ def main():
     print "Input: {input}".format(input=args.tileinput)
     rootPath = args.tileinput[0]
     multiThread = args.multithread
+    noData = args.dstnodata
 
-    if args.threads:
-        mThreads = args.threads
-    else:
-        mThreads = 8
-
-    if args.buffer:
-        mBuffer = args.buffer
-    else:
-        mBuffer = 40
+    mThreads = args.threads and args.threads or 8
+    mBuffer = args.buffer and args.buffer or 40
+    noData = args.dstnodata and args.dstnodata or -500
   
-    ColorEncoder(rootPath,multiThread,mThreads,mBuffer).start()
+    ColorEncoder(rootPath,noData,multiThread,mThreads,mBuffer).start()
 
    
 

@@ -8,8 +8,9 @@ from math import ceil
 
 class TileBorderCore:
 
-    def __init__(self,tilescheme):
-        self.tilescheme = tilescheme
+    def __init__(self,tilescheme, nodata):
+        self.tileScheme = tilescheme
+        self.noData = float(nodata)
         pass
 
     def process(self, in_fn, in_zxy, out_fn):
@@ -17,7 +18,7 @@ class TileBorderCore:
         # supress creation of aux.xml metadata-files.
         gdal.SetConfigOption("GDAL_PAM_ENABLED","NO")
         self.openInputDataset(in_fn)
-        self.createOutputDataset(self.getTileNeighbours(in_zxy,self.tilescheme))
+        self.createOutputDataset(self.getTileNeighbours(in_zxy,self.tileScheme))
         self.exportToTif(self.out_ds, out_fn)
 
         self.in_ds = None
@@ -32,7 +33,7 @@ class TileBorderCore:
 
         # read band 1 and blocksize from input image
         self.in_band_1 = self.in_ds.GetRasterBand(1)
-        self.in_band_1.SetNoDataValue(-500)
+        self.in_band_1.SetNoDataValue(self.noData)
 
     
     def getTileNeighbours(self, in_zxy, tilescheme):
@@ -176,9 +177,10 @@ class TileBorderCore:
         export_ds = None
 
 class TileBorderComputer:
-    def __init__(self,tileScheme,rootPath,multiThread,mThreads,mBuffer):
+    def __init__(self,tileScheme,rootPath,noData,multiThread,mThreads,mBuffer):
         self.tileScheme = tileScheme
         self.rootPath = rootPath
+        self.noData = noData
         self.multiThread = multiThread
         self.mThreads = mThreads
         self.mBuffer = mBuffer
@@ -197,7 +199,7 @@ class TileBorderComputer:
             maxThreads=int(self.mThreads)
             bufferSize=int(self.mBuffer)
             # create instance of core class
-            _TileBorderCore=TileBorderCore(self.tileScheme)
+            _TileBorderCore=TileBorderCore(self.tileScheme,self.noData)
 
         # walk directory
         for root, dirs, files in os.walk(self.rootPath):
@@ -234,7 +236,7 @@ class TileBorderComputer:
                         j+=1
                 else:
                     # start computing for each single file (takes forever!)
-                    TileBorderCore(self.tileScheme).process(inputFile, zxy, outputFile)
+                    TileBorderCore(self.tileScheme,self.noData).process(inputFile, zxy, outputFile)
 
         if self.multiThread:
                 # should be done in a nicer way
@@ -282,9 +284,10 @@ def parseArguments():
     parser = argparse.ArgumentParser(description='Tiles get to know their neighbours.')
     parser.add_argument( "tilefolder", type=extant_folder, nargs='+',help="Tile Map Service Folder ", metavar="TMS FOLDER")    
     parser.add_argument( "tilescheme", type=str, default='xyz', help="Set tile scheme [tms or xyz]", metavar="TILE SCHEME")    
-    parser.add_argument('-m','--multithread', help='If set, multithreading is deactivated (default true).',required=False, action='store_false')    
+    parser.add_argument('-m','--multithread', help='If set, multithreading is deactivated (default true).',required=False, action='store_true')    
     parser.add_argument('-t','--threads', help='Number of threads (4). This functionality is only experimental',required=False)      
     parser.add_argument('-b','--buffer', help='Number of tiles in buffer (300).This functionality is only experimental',required=False)     
+    parser.add_argument('-n','--dstnodata', help='Nodata value in tiles (default -500).',required=False)
     return parser.parse_args()
 
 def main():
@@ -293,22 +296,17 @@ def main():
     tileScheme = args.tilescheme
     multiThread =  args.multithread
     rootPath = args.tilefolder[0]
+    noData = args.dstnodata
 
-    if args.threads:
-        mThreads = args.threads
-    else:
-        mThreads = 8
-
-    if args.buffer:
-        mBuffer = args.buffer
-    else:
-        mBuffer = 40
+    mThreads = args.threads and args.threads or 8
+    mBuffer = args.buffer and args.buffer or 40
+    noData = args.dstnodata and args.dstnodata or -500
 
     print "Compute tile border values with help of their neighbours."
     print "Input: {input}".format(input=args.tilefolder)
     print "Tilescheme: {tileScheme}".format(tileScheme=tileScheme)
 
-    TileBorderComputer(tileScheme,rootPath,multiThread,mThreads,mBuffer).start()
+    TileBorderComputer(tileScheme,rootPath,noData,multiThread,mThreads,mBuffer).start()
 
 if __name__ == '__main__':
     main()   
