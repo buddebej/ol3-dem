@@ -1,0 +1,38 @@
+Processed: 3 SRTM Tiles in vrt (216mb), resulting PNG Tileset is 90mb.
+
+Number of threads should not be more then available CPU Cores.
+Size of Buffer should not be to small.
+
+It seems that the bottleneck is the read/write (harddrive).
+Get up to 100% faster results on SSD in comparison with hdd.
+
+threads/tilebuffer
+
+No parallel threads
+
+1/1
+tile_border_neighbours: 0.13 minutes
+tile_colorencode: 0.83 minutes
+
+Multiple parallel threads
+
+4/20
+tile_border_neighbours: 0.07 minutes
+tile_colorencode: 0.35 minutes
+
+4/100
+tile_border_neighbours: 0.06 minutes
+tile_colorencode: 0.35 minutes
+
+8/20
+tile_border_neighbours: 0.07 minutes
+tile_colorencode: 0.35 minutes
+
+8/100
+tile_border_neighbours: 0.06 minutes
+tile_colorencode: 0.34 minutes
+
+16/100
+tile_border_neighbours: 0.06 minutes
+tile_colorencode: 0.33 minutes
+

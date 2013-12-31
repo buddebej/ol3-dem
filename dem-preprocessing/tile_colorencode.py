@@ -161,7 +161,7 @@ class ColorEncoder:
                     os.mkdir(os.path.join(f,z))
                 if not os.path.isdir(os.path.join(f,z,x)):
                     os.mkdir(os.path.join(f,z,x))
-                outputFile = os.path.join(f, z, x, y + '.tif')
+                outputFile = os.path.join(f, z, x, y + '.png')
 
                 if self.multiThread: 
                     # start computing with multiple threads (is much faster!)
@@ -189,20 +189,19 @@ class ColorEncoder:
                 tileQueue.put(tileBuffer[j])  
                                 
                 def callThread(queue):
-                    # read tile stack from queue
-                    tileProcessQueue=queue.get()
-                    for tile in tileProcessQueue:
-                        # start computing
-                        _EncoderCore.process(*tile)
+                    if not queue.empty():
+                        # read tile stack from queue
+                        tileProcessQueue=queue.get()
+                        for tile in tileProcessQueue:
+                            # start computing
+                            _EncoderCore.process(*tile)
                 
                 # this loop starts multiple threads (maxThreads) to process one cluster per thread
                 # it runs as often as numberOfPools = (number of clusters / maxThreads)
 
                 numberOfPools=int(ceil((len(tileBuffer))/maxThreads))+1
                 for n in range(numberOfPools):
-                    if n == numberOfPools-1 and len(tileBuffer[j]) <= bufferSize:
-                        maxThreads=1
-                    
+  
                     # multiple threads are defined (callThread gets called)
                     processes=[(Process(target=callThread,args=(tileQueue,))) for m in range(maxThreads)]
 

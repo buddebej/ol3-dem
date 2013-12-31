@@ -627,7 +627,6 @@ class Pyramid(object):
             f.write(vrt_text.encode('utf-8'))
 
         # warp base raster
-
         base_ds = gdal.Open(vrt_text, GA_ReadOnly)
         pf('.', end='')
 

@@ -39,19 +39,20 @@ class ExecuteCommand():
 		self.durations[index]=("{0:.2f} minutes".format((self.now()-start)/60.0))
 
 def parseArguments():
-	parser = argparse.ArgumentParser(description='Produces a set of tiles of a input dem dataset.')
+	parser = argparse.ArgumentParser(description='Produces a tileset of a input dem dataset. The resulting tiles can i.e. be read by webgl applications')
 	group = parser.add_mutually_exclusive_group(required=True)
-	group.add_argument('-i','--deminput', help='Input dem. Can be *vrt or any other format that can be read by gdal.')
-	group.add_argument('-x','--tileinput', help='Input tile set (tif). Tile computing is not done to save cpu time.')
+	group.add_argument('-i','--deminput', help='Set input raw dem. Can be *vrt or any other format that can be read by gdal.')
+	group.add_argument('-x','--tileinput', help='Set input tileset (tif). Can be tileset created previously by tiler-tools. \nTile computing is not done to save cpu time.')
 	parser.add_argument('-o','--output', help='Output path for temporary files and tiles.',required=True)
+	parser.add_argument('-n','--dstnodata', help='Nodata value in destination tileset (default -500).',required=False)
 	parser.add_argument('-s','--scheme', help='Tile Scheme of output tiles. Supported are TMS and XYZ (default).',required=False)
-	parser.add_argument('-a','--archive', help='Creates archive with tiles (default false).',required=False, action='store_true')	
+	parser.add_argument('-m','--multithread', help='If set, multithreading is enabled (default false). \nThis functionality is only experimental.\n You can play with the -t and -b flag.',required=False,action='store_true')		
+	parser.add_argument('-t','--threads', help='Number of threads (4). Experimental!',required=False)		
+	parser.add_argument('-b','--buffer', help='Number of tiles in buffer (20). Experimental',required=False)	
+	parser.add_argument('-a','--archive', help='Creates tar archive of tileset (default false).',required=False, action='store_true')	
 	parser.add_argument('-tf','--temp', help='Keep temporary files (default false).',required=False, action='store_true')	
-	parser.add_argument('-m','--multithread', help='If set, multithreading is deactivated (default true). This functionality is only experimental',required=False,action='store_true')		
-	parser.add_argument('-t','--threads', help='Number of threads (4). This functionality is only experimental',required=False)		
-	parser.add_argument('-b','--buffer', help='Number of tiles in buffer (20).This functionality is only experimental',required=False)		
-	parser.add_argument('-v','--verbose', help='Allow verbose console output.',required=False, action='store_true')	
-	parser.add_argument('-n','--dstnodata', help='Nodata value in tiles (default -500).',required=False)
+	parser.add_argument('-v','--verbose', help='Allow verbose console output (default false).',required=False, action='store_true')	
+
 	return parser.parse_args()
 
 def main():
