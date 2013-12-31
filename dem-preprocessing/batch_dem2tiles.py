@@ -4,7 +4,7 @@ from tile_border_neighbours import TileBorderComputer
 from tile_colorencode import ColorEncoder
 
 def parseArguments():
-	parser = argparse.ArgumentParser(description='Produces a tileset of a input dem dataset. The resulting tiles can i.e. be read by webgl applications')
+	parser = argparse.ArgumentParser(description='Produces a tileset of an input dem dataset. The resulting tiles can i.e. be read by webgl applications')
 	group = parser.add_mutually_exclusive_group(required=True)
 	group.add_argument('-i','--deminput', help='Set input raw dem. Can be *vrt or any other format that can be read by gdal.')
 	group.add_argument('-x','--tileinput', help='Set input tileset (tif). Can be tileset created previously by tiler-tools. \nTile computing is not done to save cpu time.')
@@ -41,7 +41,7 @@ class ProcessControl():
 		for t in self.durations:
 			print t+': '+self.durations[t]
 
-	# calls commandline tools in silent/verbose mode and registers runtime
+	# executes proceses in silent/verbose mode, prints console output and registers runtime
 	def execute(self, index, msg, cmd):
 		start = self.now()
 		print("\n{app}: {output}".format(app=index,output=msg))
@@ -54,13 +54,13 @@ class ProcessControl():
 					subprocess.call(cmd, shell=True, stdout=silent)
 		else: # cmd is a python object
 			cmd.start()
-		self.durations[index]=("{0:.2f} minutes".format((self.now()-start)/60.0))
+		self.durations[index]=("{0:.2f} minutes".format((self.now()-start)/60.0)) # register runtime
 	
 def main():
 	args = parseArguments()
 	ps = ProcessControl(args.verbose) 
 
-	# parameter = if x use x else use default value
+	# set parameter = if x use x else use default value
 	tileScheme = args.scheme and args.scheme or 'xyz'
 	multiThread = args.multithread
 	mThreads = args.threads and args.threads or 4
@@ -69,18 +69,17 @@ def main():
 	noData = args.dstnodata and args.dstnodata or -500
 
 	# set working directories
+	demName = os.path.split(inputData)[1]
 	workingDir = os.path.dirname(os.path.abspath(__file__))
 	tilertoolDir = os.path.join(workingDir,'tiler-tools')
 	tilesOutput = args.output
 	tilesDestination = os.path.join(tilesOutput,'tiles')
-	demName = os.path.split(inputData)[1]
 	tilesRaw = args.tileinput and os.path.normpath(inputData) or os.path.join(tilesOutput,os.path.splitext(demName)[0]+'.'+tileScheme)
 	tilesWithNeighbours = tilesRaw+'-with-neighbour-values'
 	tilesColorEncoded = tilesRaw+'-with-neighbour-values-colorencoded'
 
 	# delete destination folder if already exists
-	if os.path.isdir(tilesDestination):
-		shutil.rmtree(tilesDestination)
+	if os.path.isdir(tilesDestination):	shutil.rmtree(tilesDestination)
 
 	os.system('clear')
 	print ("Start processing: {demName}".format(demName=demName))	
@@ -94,7 +93,6 @@ def main():
 
 	# rename output dir
 	shutil.move(tilesColorEncoded, tilesDestination)
-
 	# clean up temporary files if flag is set
 	if not args.temp and not args.tileinput:
 		print('\nCleaning up temporary files.')

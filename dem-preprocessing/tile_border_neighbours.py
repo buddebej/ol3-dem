@@ -244,6 +244,8 @@ class TileBorderComputer:
                 # when cluster maximum size is not reached anymore during the last loop
                 tileBuffer.append(tileCluster)
                 tileQueue.put(tileBuffer[j])  
+
+                print str(j*bufferSize+len(tileCluster))+' tiles to process.'
                                 
                 def callThread(queue):
                     # read tile stack from queue
@@ -252,12 +254,23 @@ class TileBorderComputer:
                         for tile in tileProcessQueue:
                             # start computing
                             _TileBorderCore.process(*tile)
+
+                def drawProgressBar(percent, barLen = 50):
+                    sys.stdout.write("\r")
+                    progress = ""
+                    for i in range(barLen):
+                        if i < int(barLen * percent):
+                            progress += "="
+                        else:
+                            progress += " "
+                    sys.stdout.write("[ %s ] %.2f%%" % (progress, percent * 100))
+                    sys.stdout.flush()
                 
                 # this loop starts multiple threads (maxThreads) to process one cluster per thread
                 # it runs as often as numberOfPools = (number of clusters / maxThreads)
-
                 numberOfPools=int(ceil((len(tileBuffer))/maxThreads))+1
                 for n in range(numberOfPools):
+                    drawProgressBar(float(n+1)/float(numberOfPools))
 
                     # multiple threads are defined (callThread gets called)
                     processes=[(Process(target=callThread,args=(tileQueue,))) for m in range(maxThreads)]
@@ -268,6 +281,7 @@ class TileBorderComputer:
                     # loop waits until they are all finished
                     for p in processes:
                         p.join() 
+                sys.stdout.write("\n\n")
 
         #print time.time()-start
 
