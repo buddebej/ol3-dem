@@ -5,7 +5,7 @@ See the benchmark file for information about the multithreading feature.
 
 To ensure that no artefacts occur during the resampling of the images the order of the workflow has to be:
 
-* tiler-tools 
+* tiler-tools (http://code.google.com/p/tilers-tools/)
 (creates tif tiles of a dem in a gdal readable format)
 
 * tile_border_neighbours.py 
