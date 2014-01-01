@@ -1,7 +1,12 @@
 Both tile_border_neighbours.py and tile_colorencode.py are standalone tools and can be used independently. 
-You can use batch_dem2tiles.py as a interface to call all tools in their respective order.
-In addition it takes care about the temporary files and offers several other options.
+
+You can use batch_dem2tiles.py as an interface to call all tools in their respective order.
+In addition it takes care of the temporary files and offers several other options.
 See the benchmark file for information about the multithreading feature.
+
+Everything was tested in Sabayon Linux amd64 14.01 with GDAL 1.10 and Python 2.7.
+Dependencies are Python, Python bindings (python-gdal), Python imaging library (PIL), GDAL binaries (gdal-bin 1.7+).
+Optionally you would need tar to create archives of the tilesets.
 
 To ensure that no artefacts occur during the resampling of the images the order of the workflow has to be:
 
@@ -15,6 +20,8 @@ To ensure that no artefacts occur during the resampling of the images the order 
 (encodes up to Float32 values in tif and write into two 8 bit bands of a png)
 
 ###############################################################################
+
+batch_dem2tiles.py
 
 See the help with batch_dem2tiles.py -h.
 
@@ -51,4 +58,16 @@ optional arguments:
   -a, --archive         Creates tar archive of tileset (default false).
   -tf, --temp           Keep temporary files (default false).
   -v, --verbose         Allow verbose console output (default false).
+
+#################################################################################
+
+Tiler Tools 3.0
+
+Unfortunately there currently (Dez 2013) is a problem with tiler-tools, when it comes to process the complete srtm dataset.
+The issue is reported here and there will hopefully be a fix soon.
+
+https://code.google.com/p/tilers-tools/issues/detail?id=11
+
+
+
 
