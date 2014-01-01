@@ -9,11 +9,9 @@ The needed modifications of the ol3 alpha src were made in:
 **src/ol/renderer/webgl/webgltilelayer.glsl**
 
 Is responsible for the rendering of the tiles.
-Vertex shader:
-Computes plan oblique relief.
+Vertex shader: Computes plan oblique relief.
+Fragment shader: Computes hillshading, hypsometric colors, waterbodies.
 
-Fragment shader:
-Computes hillshading, hypsometric colors, waterbodies.
 ---
 
 **src/ol/renderer/webgl/webgltilelayerrenderer.js**
@@ -37,14 +35,6 @@ Serves the tile renderer with all needed input.
 Administrates the properties of each layer.
 * some custom properties and get/set methods were added
 * these methods are public and can be accessed for every layer.
-      dem.setObliqueInclination(this.inclination);
-      dem.setColorScale(this.colorScale);
-      dem.setLightAzimuth(this.azimuth);
-      dem.setLightZenith(this.zenith)
-      dem.setWaterBodies(this.waterBodies);
-      dem.setTesting(this.testing);
-      dem.setResolution(this.resolution/100.0);
-      dem.setHillShading(this.hillShade);
 
 
 ol3dem demo application:
