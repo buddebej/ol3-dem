@@ -6,14 +6,14 @@ ol3-source:
 For details take a look at the source code and read code comments.
 The needed modifications of the ol3 alpha src were made in:
 
-######src/ol/renderer/webgl/webgltilelayer.glsl
+**src/ol/renderer/webgl/webgltilelayer.glsl**
 Is responsible for the rendering of the tiles.
 Vertex shader:
 	Computes plan oblique relief.
 Fragment shader:
 	Computes hillshading, hypsometric colors, waterbodies.
 
-######src/ol/renderer/webgl/webgltilelayerrenderer.js
+**src/ol/renderer/webgl/webgltilelayerrenderer.js**
 Serves the tile renderer with all needed input.
 * creates triangle mesh for each tile 
   fills a vertex and an element buffer 
@@ -26,7 +26,7 @@ Serves the tile renderer with all needed input.
 * calls src/ol/renderer/webgl/webglmapdefault.glsl 
   that renders the complete map view with the tile buffer
 
-######src/ol/layer/layerbase.js
+**src/ol/layer/layerbase.js**
 Administrates the properties of each layer.
 * some custom properties and get/set methods were added
 * these methods are public and can be accessed for every layer.
@@ -43,10 +43,10 @@ Administrates the properties of each layer.
 ol3dem demo application:
 ------
 
-######ol3dem/js/ol3demInit.js
+**ol3dem/js/ol3demInit.js**
 Initializes the ol3 map, the dem layer and a view.
 
-`ol3dem/js/ol3demUi.js`
+**ol3dem/js/ol3demUi.js**
 Initializes the ol3dem user interface.
 
 Put or link tiles into data/tiles.
@@ -55,7 +55,7 @@ Put or link tiles into data/tiles.
 ol3-build routine:
 ------
 
-######src/ol/webgl/shader.mustache
+**src/ol/webgl/shader.mustache**
 changed shader build template
 to remove ol-default medium precision for fragment shader
 
