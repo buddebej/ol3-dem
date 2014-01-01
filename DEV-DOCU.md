@@ -1,12 +1,11 @@
-#ol3-dem development documentation
+###ol3-dem development documentation
 
 SOURCE:
-=========
+------
 
 For details take a look at the source code and read code comments.
 The needed modifications of the ol3 alpha src were made in:
 
-*****************************************
 ######src/ol/renderer/webgl/webgltilelayer.glsl
 
 Is responsible for the rendering of the tiles.
@@ -15,7 +14,6 @@ Vertex shader:
 Fragment shader:
 	Computes hillshading, hypsometric colors, waterbodies.
 
-***********************************************
 ######src/ol/renderer/webgl/webgltilelayerrenderer.js
 
 Serves the tile renderer with all needed input.
@@ -30,7 +28,6 @@ Serves the tile renderer with all needed input.
 * calls src/ol/renderer/webgl/webglmapdefault.glsl 
   that renders the complete map view with the tile buffer
 
-*************************
 ######src/ol/layer/layerbase.js
 
 Administrates the properties of each layer.
@@ -47,14 +44,12 @@ Administrates the properties of each layer.
 
 
 DEMO:
-=========
+------
 
-***********************
 ######ol3dem/js/ol3demInit.js
 
 Initializes the ol3 map, the dem layer and a view.
 
-***********************
 ######ol3dem/js/ol3demUi.js
 
 Initializes the ol3dem user interface.
@@ -63,9 +58,8 @@ Put or link tiles into data/tiles.
 
 
 OL3-BUILD:
-=========
+------
 
-****************************
 ######src/ol/webgl/shader.mustache
 
 changed shader build template
