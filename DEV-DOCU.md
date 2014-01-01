@@ -10,6 +10,7 @@ The needed modifications of the ol3 alpha src were made in:
 
 Is responsible for the rendering of the tiles.
 Vertex shader: Computes plan oblique relief.
+
 Fragment shader: Computes hillshading, hypsometric colors, waterbodies.
 
 ---
