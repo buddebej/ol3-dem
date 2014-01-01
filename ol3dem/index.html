@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+
+    <link rel="stylesheet" href="css/ol.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="css/base.css" />
+
+    <script src="lib/jquery-1.9.1.js"></script>
+    <script src="lib/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="lib/jquery_knob.js"></script>
+
+    <script src="js/ol3demUi.js" type="text/javascript"></script>
+    <script src="js/ol3demInit.js" type="text/javascript"></script>
+
+    <title>ol3dem</title>
+</head>
+
+<body>
+    <div id="map" class="map"></div>
+
+    <div id="controls" class="controlBox">
+        <div class="controlHeader">
+            <p>Plan Oblique</p>
+        </div>
+        <div class="controlBody">
+            <p>Inclination (°)</p>
+            <div class="knob">
+                <input type="text" class="inclination" data-cursor=true>
+            </div>
+            <p>Resolution of Mesh (%)</p>
+            <div class="resolutionSlider"></div>
+            <div id="resolution">
+                <div class="scaleMin">1%</div>
+                <div class="scaleMax">100%</div>
+                <div class="clearFloat"></div>
+            </div>
+            Try this for higher performance.
+        </div>
+
+        <div class="controlHeader">
+            <p>Coloring</p>
+        </div>
+        <div class="controlBody">
+            <p>Scale of Color Ramp (m)</p>
+            <div class="colorSlider"></div>
+            <div id="colorScale">
+                <div class="scaleMin"></div>
+                <div class="scaleMax"></div>
+                <div class="clearFloat"></div>
+            </div>
+            <div class="checkbox t_WaterBodies">
+                <input type="checkbox">Detect Water Bodies</div>
+        </div>
+
+        <div class="controlHeader">
+            <p>Hillshading</p>
+        </div>
+        <div class="controlBody">
+            <div class="floatBox">
+                <p>Zenith (°)</p>
+                <div class="knob">
+                    <input type="text" class="lightZenith" data-cursor=true>
+                </div>
+            </div>
+            <div class="floatBox">
+                <p>Azimuth (°)</p>
+                <div class="knob">
+                    <input type="text" class="lightAzimuth" data-cursor=true>
+                </div>
+            </div>
+            <div class="clearFloat"></div>
+            <div class="checkbox t_HillShading">
+                <input type="checkbox">Compute Hillshading</div>
+        </div>
+
+        <div class="controlHeader">
+            <p>Testing</p>
+        </div>
+        <div class="checkbox controlBody">
+            <div class="checkbox t_Testing">
+                <input type="checkbox">Testing mode.</div>
+            <p>Rotation of View (0° is North)</p>
+            <div class="knob">
+                <input type="text" class="rotateView" data-cursor=true>
+            </div>
+            <p>Or press Alt+Shift and drag map with mouse to rotate view.</p>
+        </div>
+    </div>
+    </div>
+</body>
+
+<script src="http://localhost:9810/compile?id=ol&mode=SIMPLE" type="text/javascript"></script>
+<!--<script src="js/ol3dem.js" type="text/javascript"></script>-->
+</html>

@@ -1,0 +1,86 @@
+ body {
+        background-color: #000000;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    .map {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+    .controlBox {
+        background-color: #ffffff;
+        opacity: 0.95;
+        padding: 0.4em;
+        padding-bottom: 1em;
+        width: 180px;
+        right:1em;
+        top:1em;
+        position:fixed;
+        font: 8pt Verdana;
+        border:5px solid #e1e1e1;
+    }
+    .controlHeader {
+        width:100%;
+        height:24px;
+        background-color: #000000;
+    }
+    .controlHeader p {
+        margin:0;
+        padding:4px;
+        color:#ffffff;
+    }
+    .controlBody {
+        width:94%;
+        padding:3%;
+        padding-top:0;
+        margin-bottom:1em;
+    }
+    .controlBody p {
+        margin:0;
+        margin-top:0.9em;
+        padding:0;
+    }
+    .knob {
+        width:60px;
+        height:60px;
+        padding:5px;
+    }
+    .floatBox {
+        float:left;
+        width:70px;
+    }
+    .clearFloat {
+        clear:both;
+    }
+    .colorSlider {
+        margin-top:0.6em;
+        margin-bottom:0.2em;
+    }
+    .scaleMin {
+        width:50%;
+        float:left;
+        text-align:left;
+    }
+    .scaleMax {
+        width:50%;
+        float:left;
+        text-align:right;
+    }
+    .checkbox {
+        margin-top:0.9em;
+    }
+    .checkbox input {
+        padding:0;
+        margin:0;
+        vertical-align: middle;
+    }
+    .ui-slider-horizontal {
+        height:5px;
+        width:100%;
+    }
+    .ui-slider-horizontal .ui-slider-handle {
+        height:8px;
+        width:8px;
+    }
