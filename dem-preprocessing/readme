@@ -64,7 +64,7 @@ optional arguments:
 Tiler Tools 3.0
 
 Unfortunately there currently (Dez 2013) is a problem with tiler-tools, when it comes to process the complete srtm dataset.
-The issue is reported here and there will hopefully be a fix soon.
+The issue is reported (see link below) and there will hopefully be a fix soon.
 
 https://code.google.com/p/tilers-tools/issues/detail?id=11
 
