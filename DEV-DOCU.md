@@ -13,7 +13,7 @@ Vertex shader:
 	Computes plan oblique relief.
 Fragment shader:
 	Computes hillshading, hypsometric colors, waterbodies.
-
+---
 
 **src/ol/renderer/webgl/webgltilelayerrenderer.js**
 
@@ -29,6 +29,7 @@ Serves the tile renderer with all needed input.
 * calls src/ol/renderer/webgl/webglmapdefault.glsl 
   that renders the complete map view with the tile buffer
 
+---
 
 **src/ol/layer/layerbase.js**
 
@@ -52,6 +53,7 @@ ol3dem demo application:
 
 Initializes the ol3 map, the dem layer and a view.
 
+---
 
 **ol3dem/js/ol3demUi.js**
 
