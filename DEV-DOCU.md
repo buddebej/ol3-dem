@@ -7,6 +7,7 @@ For details take a look at the source code and read code comments.
 The needed modifications of the ol3 alpha src were made in:
 
 **src/ol/renderer/webgl/webgltilelayer.glsl**
+
 Is responsible for the rendering of the tiles.
 Vertex shader:
 	Computes plan oblique relief.
@@ -14,6 +15,7 @@ Fragment shader:
 	Computes hillshading, hypsometric colors, waterbodies.
 
 **src/ol/renderer/webgl/webgltilelayerrenderer.js**
+
 Serves the tile renderer with all needed input.
 * creates triangle mesh for each tile 
   fills a vertex and an element buffer 
@@ -27,6 +29,7 @@ Serves the tile renderer with all needed input.
   that renders the complete map view with the tile buffer
 
 **src/ol/layer/layerbase.js**
+
 Administrates the properties of each layer.
 * some custom properties and get/set methods were added
 * these methods are public and can be accessed for every layer.
