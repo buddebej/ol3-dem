@@ -46,7 +46,7 @@ ol3dem demo application:
 ######ol3dem/js/ol3demInit.js
 Initializes the ol3 map, the dem layer and a view.
 
-######ol3dem/js/ol3demUi.js
+`ol3dem/js/ol3demUi.js`
 Initializes the ol3dem user interface.
 
 Put or link tiles into data/tiles.
