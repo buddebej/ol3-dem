@@ -54,6 +54,11 @@
         return Math.abs(a) * 180 / Math.PI;
       };
 
+      // hide / show controlBox 
+      $('.boxControl').click(function(){
+        $('.controls').hide('blind', 500, function(){$('.controls').text('show controls');});
+      });
+
       // slider to stretch hypsometric colors  
       $('.colorSlider').slider({
         min: 0,
