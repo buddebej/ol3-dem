@@ -55,7 +55,7 @@ goog.addSingletonGetter(ol.renderer.webgl.map.shader.DefaultVertex);
  * @const
  * @type {string}
  */
-ol.renderer.webgl.map.shader.DefaultVertex.DEBUG_SOURCE = 'varying vec2 v_texCoord;\n\n\nattribute vec2 a_position;\nattribute vec2 a_texCoord;\n\nuniform mat4 u_texCoordMatrix;\nuniform mat4 u_projectionMatrix;\n\n//float alpha = radians(-180.);\n//float cosinus = cos(alpha);\n//float sinus = sin(alpha);\n//mat4 rotatex = mat4(vec4(1.,0.,0.,0.),vec4(0.,cosinus,sinus,0.),vec4(0.,-sinus,cosinus,0.),vec4(0.,0.,0.,1.));\n//mat4 rotatez = mat4(vec4(cosinus,sinus,0.,0.),vec4(-sinus,cosinus,0.,0.),vec4(0.,0.,1.,0.),vec4(0.,0.,0.,1.));\n//mat4 scale = mat4(vec4(1.,0.,0.,0.),vec4(0.,1.,0.,0.),vec4(0.,0.,1.,0.),vec4(1.5,1.5,1.,1.));\n\nvoid main(void) {\n  gl_Position = u_projectionMatrix * vec4(a_position, 0., 1.);\n  v_texCoord = (u_texCoordMatrix * (vec4(a_texCoord, 0., 1.))).st;\n}\n\n\n';
+ol.renderer.webgl.map.shader.DefaultVertex.DEBUG_SOURCE = 'varying vec2 v_texCoord;\n\n\nattribute vec2 a_position;\nattribute vec2 a_texCoord;\n\nuniform mat4 u_texCoordMatrix;\nuniform mat4 u_projectionMatrix;\n\nvoid main(void) {\n  gl_Position = u_projectionMatrix * vec4(a_position, 0., 1.);\n  v_texCoord = (u_texCoordMatrix * (vec4(a_texCoord, 0., 1.))).st;\n}\n\n';
 
 
 /**

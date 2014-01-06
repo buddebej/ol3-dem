@@ -8,7 +8,7 @@ The needed modifications of the ol3 alpha src were made in:
 
 **src/ol/renderer/webgl/webgltilelayer.glsl**
 
-Is responsible for the rendering of the tiles.
+Is responsible for the rendering of the tiles to the frameBuffer used in the webglmapdefault.glsl.
 
 Vertex shader: Computes plan oblique relief.
 
@@ -29,6 +29,21 @@ Serves the tile renderer with all needed input.
 * creates a buffer with all rendered single tiles
 * calls src/ol/renderer/webgl/webglmapdefault.glsl 
   that renders the complete map view with the tile buffer
+
+---
+
+**src/ol/renderer/webgl/webglmaprenderer.js**
+
+Renders the map with a framebuffer filled with tiles as a texture.
+* enabled depth test
+
+---
+
+**src/ol/renderer/webgl/webgllayerrenderer.js**
+
+* added a renderbuffer to store the depth values for the tiles because the z-test is done in the webglmapdefault renderer.
+* just enabling depth as an argument of the getContext in webglmaprenderer.js is *not* sufficent for depth testing inside of the tilerenderer.
+(thanks to http://learningwebgl.com/blog/?p=1786)
 
 ---
 

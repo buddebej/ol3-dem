@@ -505,18 +505,15 @@ ol.renderer.webgl.Map.prototype.initializeGL_ = function() {
   var gl = this.gl_;
 
   gl.activeTexture(goog.webgl.TEXTURE0);
-  //gl.blendFuncSeparate(
-    //  goog.webgl.SRC_ALPHA, goog.webgl.ONE_MINUS_SRC_ALPHA,
-    //  goog.webgl.ONE, goog.webgl.ONE_MINUS_SRC_ALPHA);
+  gl.blendFuncSeparate(
+      goog.webgl.SRC_ALPHA, goog.webgl.ONE_MINUS_SRC_ALPHA,
+      goog.webgl.ONE, goog.webgl.ONE_MINUS_SRC_ALPHA);
  
-  //gl.frontFace(goog.webgl.CW);
-  //gl.enable(goog.webgl.CULL_FACE);
+  // enable depth testing
   gl.disable(goog.webgl.SCISSOR_TEST);
-
-  gl.depthMask(true);
-  gl.enable(goog.webgl.DEPTH_TEST);                               
+  gl.enable(goog.webgl.DEPTH_TEST);  
+  gl.depthRange(0.0,1.0);                             
   gl.depthFunc(goog.webgl.LEQUAL);   
-  gl.depthRange(0.0,0.4);
 
 };
 

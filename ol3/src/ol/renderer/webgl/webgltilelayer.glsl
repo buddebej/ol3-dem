@@ -43,13 +43,14 @@ void main(void) {
     
     // compute y-flipped texture coordinates for further processing in fragment-shader
     v_texCoord.y = 1.0 - v_texCoord.y;
- 
+
     // read and decode elevation for current vertex
     float absElevation = decodeElevation(texture2D(u_texture, v_texCoord.xy));
     
     // shift vertex positions by given scale factor (dependend of the plan oblique inclination)
     // direction of shift is always the top of the screen so it has to be adapted when the map view is rotated
-    vec4 vertexPosition = vec4((a_position+(absElevation * u_scaleFactor.xy) / u_tileSizeM) * u_tileOffset.xy + u_tileOffset.zw, absElevation/u_tileSizeM, 1.0);
+    // z value has to be inverted to get a left handed coordinate system and to make the depth test work
+    vec4 vertexPosition = vec4((a_position+(absElevation * u_scaleFactor.xy) / u_tileSizeM) * u_tileOffset.xy + u_tileOffset.zw, 1.0-abs(absElevation/u_tileSizeM), 1.0);
 
 	gl_Position = vertexPosition;
 }
@@ -83,17 +84,7 @@ const float MAX_ELEVATION = 4900.0; // assumed to be the highest elevation in th
 const highp float CELLSIZE = 0.00390625; // =1.0/256.0
 
 void main(void) {
-
-	// compute mesh cellSize dependend of resolution (number of vertices per edge)
-	//highp float CELLSIZE = 1.0 / u_meshResolution; 
-
-	// Orientation of coordinate system in fragment shader:
-	// ------>	x
-	// |
-	// |
-	// \/
-	// y
-    
+  
     // When on eastern or southern tile border, take not current cells elevation
     // but use (northern / western) neighbour cell to avoid stronger artefacts.
     // The values on each adjacent tile border is the same so without this filter
@@ -171,8 +162,6 @@ void main(void) {
 		// apply only hypsometric color
 		gl_FragColor = hypsoColor;
 	}
-
-
 
 // testing mode
 	if(u_testing){

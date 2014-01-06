@@ -146,6 +146,12 @@ ol.renderer.webgl.Layer.prototype.bindFramebuffer =
     gl.framebufferTexture2D(goog.webgl.FRAMEBUFFER,
         goog.webgl.COLOR_ATTACHMENT0, goog.webgl.TEXTURE_2D, texture, 0);
 
+    var renderbuffer = gl.createRenderbuffer();
+    gl.bindRenderbuffer(goog.webgl.RENDERBUFFER, renderbuffer);
+    gl.renderbufferStorage(goog.webgl.RENDERBUFFER, goog.webgl.DEPTH_COMPONENT16, framebufferDimension, framebufferDimension);
+
+    gl.framebufferRenderbuffer(goog.webgl.FRAMEBUFFER, goog.webgl.DEPTH_ATTACHMENT, goog.webgl.RENDERBUFFER, renderbuffer);
+
     this.texture = texture;
     this.framebuffer = framebuffer;
     this.framebufferDimension = framebufferDimension;

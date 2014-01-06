@@ -261,6 +261,9 @@ ol.renderer.webgl.TileLayer.prototype.renderFrame =
 
       gl.clearColor(0, 0, 0, 0);
       gl.clear(goog.webgl.COLOR_BUFFER_BIT);
+
+      gl.clearDepth(1.0);
+      gl.clear(goog.webgl.DEPTH_BUFFER_BIT);
      
       var program = mapRenderer.getProgram(
         this.fragmentShader_, this.vertexShader_);
@@ -270,7 +273,6 @@ ol.renderer.webgl.TileLayer.prototype.renderFrame =
           new ol.renderer.webgl.tilelayer.shader.Locations(gl, program);
       }
 
-      
       // UNIFORM definition: u_tileSizeM
       // estimated size of one tile in meter at the equator (dependend of current zoomlevel z)
       var tileSizeM = 40000000.0 / Math.pow(2.0, z);
@@ -422,15 +424,8 @@ ol.renderer.webgl.TileLayer.prototype.renderFrame =
 
           goog.vec.Vec4.setFromValues(u_tileOffset, sx, sy, tx, ty);
           gl.uniform4fv(this.locations_.u_tileOffset, u_tileOffset);
- 
 
           mapRenderer.bindTileTexture(tile, goog.webgl.NEAREST, goog.webgl.NEAREST);
-          
-          // clear z-buffer each time before a new tile is renderer
-          gl.clearDepth(0.4);
-          gl.clear(goog.webgl.DEPTH_BUFFER_BIT);
-
-          // number of Vertices / Indices
           gl.drawElements(goog.webgl.TRIANGLES, this.tileMesh_.indexBuffer.getCount(), goog.webgl.UNSIGNED_SHORT, 0);
         }
       }
