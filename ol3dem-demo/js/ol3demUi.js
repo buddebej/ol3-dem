@@ -1,4 +1,8 @@
     var ol3demUi = function(layer, view) {
+
+      // makes controlBox visible
+      $('.controlBox').show();
+
       var dem = layer,
         view = view;
       // init map controls
