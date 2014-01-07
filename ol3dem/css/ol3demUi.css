@@ -1,32 +1,29 @@
- body {
-        background-color: #000000;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
-    .map {
-        height: 100%;
-        position: absolute;
-        width: 100%;
-    }
+
     .controlBox {
         background-color: #ffffff;
-        opacity: 0.95;
-        padding: 0.4em;
-        padding-bottom: 1em;
-        width: 180px;
+        opacity: 0.90;
         right:1em;
         top:1em;
         position:fixed;
         font: 8pt Verdana;
         border:5px solid #e1e1e1;
     }
-    .boxControl{
+    .controls{
+        padding: 0.4em;
+    }
+    .controlBoxToggle{
         font: 7pt Verdana;
-        text-align:right;
+        color:#666666;
+        width:100%;
+        background-color: #e1e1e1;
+        cursor: pointer;
+    }
+    .icon{
+        display: inline-block;
+        vertical-align: middle;
     }
     .controlHeader {
-        width:100%;
+        width:180px;
         height:22px;
         background-color: #000000;
     }
@@ -35,7 +32,6 @@
         padding:4px;
         color:#ffffff;
     }
-
     .orange {
         background-color: #F47321;
     }
@@ -48,7 +44,7 @@
     }
     .controlBody p {
         margin:0;
-        margin-top:0.9em;
+        margin-top:0.4em;
         padding:0;
     }
     .controlBody span {
@@ -103,7 +99,5 @@
         width:8px;
     }
 
-    a:link {color:#000000;text-decoration: none}     
-    a:visited {color:#000000;text-decoration: none} 
-    a:hover {color:#000000;text-decoration: underline}  
-    a:active {color:#000000;text-decoration: none}  
+    .controlBox a:link,a:visited,a:active {color:#000000;text-decoration: none}     
+    .controlBox a:hover {color:#000000;text-decoration: underline;}  

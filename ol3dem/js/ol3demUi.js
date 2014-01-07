@@ -1,6 +1,6 @@
-    var ol3demUi = function(layer,view) {
+    var ol3demUi = function(layer, view) {
       var dem = layer,
-          view = view;
+        view = view;
       // init map controls
       this.angleSteps = 1.0;
       this.inclination = 50.0;
@@ -19,7 +19,7 @@
       dem.setLightZenith(this.zenith)
       dem.setWaterBodies(this.waterBodies);
       dem.setTesting(this.testing);
-      dem.setResolution(this.resolution/100.0);
+      dem.setResolution(this.resolution / 100.0);
       dem.setHillShading(this.hillShade);
 
       $('.t_Testing input').prop('checked', this.testing);
@@ -55,8 +55,20 @@
       };
 
       // hide / show controlBox 
-      $('.boxControl').click(function(){
-        $('.controls').hide('blind', 500, function(){$('.controls').text('show controls');});
+      $('.controlBoxToggle').click(function() {
+        if ($('.controls').is(':visible')) {
+          $('.controls').hide('blind', 300, function() {
+            $('.controlBoxToggle .ui-icon-title').text('show controls');
+            $('.controlBoxToggle .ui-icon').removeClass('ui-icon-minusthick');
+            $('.controlBoxToggle .ui-icon').addClass('ui-icon-plusthick');
+          });
+        } else {
+          $('.controls').show('blind', 300, function() {
+            $('.controlBoxToggle .ui-icon-title').text('hide controls');
+            $('.controlBoxToggle .ui-icon').removeClass('ui-icon-plusthick');
+            $('.controlBoxToggle .ui-icon').addClass('ui-icon-minusthick');            
+          });
+        }
       });
 
       // slider to stretch hypsometric colors  
@@ -79,7 +91,7 @@
         max: 100,
         value: this.resolution,
         slide: function(event, ui) {
-          dem.setResolution(ui.value/100.0);
+          dem.setResolution(ui.value / 100.0);
           renderMap();
         }
       });
@@ -110,25 +122,13 @@
         renderMap();
       });
 
-      // switch to activate testing mode
-      $('.t_Testing').click(function() {
-        checkbox = $('.t_Testing input');
-        if (dem.getTesting()) {
-          dem.setTesting(false);
-          checkbox.prop('checked', false);
-        } else {
-          dem.setTesting(true);
-          checkbox.prop('checked', true);
-        }
-        renderMap();
-      });
 
       // set inclination for plan oblique relief
       $('.inclination').knob({
         'width': 110,
         'height': 70,
         'max': 90,
-        'min': 1,
+        'min': 10,
         'value': this.inclination,
         'step': angleSteps,
         'thickness': '.15',
@@ -227,7 +227,7 @@
       } else {
         var info = document.getElementById('no-download');
         info.style.display = '';
-      }*/ 
+      }*/
 
 
     };
