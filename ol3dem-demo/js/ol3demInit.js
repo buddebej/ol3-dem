@@ -7,8 +7,7 @@
           attributions: [new ol.Attribution({
             html: '<a href="http://www.eea.europa.eu/data-and-maps/data/eu-dem" target="_blank">Produced using Copernicus data and information funded by the European Union - EU-DEM layers</a>'
           })],
-          //url: 'data/tiles/{z}/{x}/{y}.png' 
-          url: 'http://128.193.213.150/tiles/eudem/{z}/{x}/{y}.png'
+          url: 'data/tiles/{z}/{x}/{y}.png' 
         })
       });
 
@@ -30,7 +29,9 @@
 
       // INIT OL3DEM USERINTERFACE
       ol3demUi(dem, view);
+
     } else {
-      $('body').append('<div class="webglMissing"><p><span class="title">Sorry!</span><br> It seems that your webbrowser does not support webgl. Please update your system or enable webgl to run this application. Click <a href="http://www.browserleaks.com/webgl" target="_blank">here</a> to check the webgl specifications of your browser.</p></div>')
+      $('body').append('<div class="webglMissing"><p><span class="title">WebGL Not Supported!</span><br> WebGL is required for this application, and your Web browser does not support WebGL. Google Chrome or Firefox are recommended browsers with WebGL support. Click <a href="http://www.browserleaks.com/webgl" target="_blank">here</a> to check the WebGL specifications of your browser.</p></div>')
     }
   });
+
