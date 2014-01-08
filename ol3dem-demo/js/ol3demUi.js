@@ -59,18 +59,18 @@
       };
 
       // hide / show controlBox 
-      $('.controlBoxToggle').click(function() {
+      $('.controlBoxHeader').click(function() {
         if ($('.controls').is(':visible')) {
           $('.controls').hide('blind', 300, function() {
-            $('.controlBoxToggle .ui-icon-title').text('show controls');
-            $('.controlBoxToggle .ui-icon').removeClass('ui-icon-minusthick');
-            $('.controlBoxToggle .ui-icon').addClass('ui-icon-plusthick');
+            $('.controlBoxHeader .ui-icon-title').text('show controls');
+            $('.controlBoxHeader .ui-icon').removeClass('ui-icon-minusthick');
+            $('.controlBoxHeader .ui-icon').addClass('ui-icon-plusthick');
           });
         } else {
           $('.controls').show('blind', 300, function() {
-            $('.controlBoxToggle .ui-icon-title').text('hide controls');
-            $('.controlBoxToggle .ui-icon').removeClass('ui-icon-plusthick');
-            $('.controlBoxToggle .ui-icon').addClass('ui-icon-minusthick');            
+            $('.controlBoxHeader .ui-icon-title').text('hide controls');
+            $('.controlBoxHeader .ui-icon').removeClass('ui-icon-plusthick');
+            $('.controlBoxHeader .ui-icon').addClass('ui-icon-minusthick');            
           });
         }
       });
