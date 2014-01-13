@@ -308,6 +308,9 @@ ol.renderer.webgl.TileLayer.prototype.renderFrame =
            lightY = Math.sin(zenithRad) * Math.sin(azimuthRad);
       gl.uniform3f(this.locations_.u_light, lightX, lightY, lightZ);
 
+      // UNIFORM definition: u_ambient_light
+      // pass intensity for an ambient light source
+      gl.uniform1f(this.locations_.u_ambient_light, layerState.ambientLight);
 
       // COLOR TEXTURE
       // Create lookup texture for hyposometric tints from arrayColorRamp  

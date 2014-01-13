@@ -10,6 +10,7 @@
       this.inclination = 50.0;
       this.lightAzimuth = 225.0;
       this.lightZenith = 45.0;
+      this.ambientLight = 0;
       this.waterBodies = true;
       this.testing = false;
       this.colorScale = [0, 3000];
@@ -20,7 +21,8 @@
       dem.setObliqueInclination(this.inclination);
       dem.setColorScale(this.colorScale);
       dem.setLightAzimuth(this.azimuth);
-      dem.setLightZenith(this.zenith)
+      dem.setLightZenith(this.zenith);
+      dem.setAmbientLight(this.ambientLight / 100.0);
       dem.setWaterBodies(this.waterBodies);
       dem.setTesting(this.testing);
       dem.setResolution(this.resolution / 100.0);
@@ -75,6 +77,27 @@
         }
       });
 
+      // set inclination for plan oblique relief
+      $('.inclination').knob({
+        'width': 110,
+        'height': 70,
+        'max': 90,
+        'min': 10,
+        'value': this.inclination,
+        'step': angleSteps,
+        'thickness': '.15',
+        'angleOffset': -90,
+        'angleArc': 90,
+        'cursor': 5,
+        'displayInput': false,
+        'bgColor': '#000000',
+        'fgColor': '#888888',
+        'change': function(v) {
+          dem.setObliqueInclination(v);
+          renderMap();
+        }
+      });
+
       // slider to stretch hypsometric colors  
       $('.colorSlider').slider({
         min: 0,
@@ -113,41 +136,6 @@
         renderMap();
       });
 
-      // switch to toggle hillshading
-      $('.t_HillShading').click(function() {
-        checkbox = $('.t_HillShading input');
-        if (dem.getHillShading()) {
-          dem.setHillShading(false);
-          checkbox.prop('checked', false);
-        } else {
-          dem.setHillShading(true);
-          checkbox.prop('checked', true);
-        }
-        renderMap();
-      });
-
-
-      // set inclination for plan oblique relief
-      $('.inclination').knob({
-        'width': 110,
-        'height': 70,
-        'max': 90,
-        'min': 10,
-        'value': this.inclination,
-        'step': angleSteps,
-        'thickness': '.15',
-        'angleOffset': -90,
-        'angleArc': 90,
-        'cursor': 5,
-        'displayInput': false,
-        'bgColor': '#000000',
-        'fgColor': '#888888',
-        'change': function(v) {
-          dem.setObliqueInclination(v);
-          renderMap();
-        }
-      });
-
       // set azimuth to compute direction of light
       $('.lightAzimuth').knob({
         'width': 60,
@@ -184,6 +172,32 @@
         }
       });
 
+      // slider to stretch hypsometric colors  
+      $('.ambientLightSlider').slider({
+        min: -100,
+        max: 100,
+        value: this.ambientLight,
+        slide: function(event, ui) {
+          dem.setAmbientLight(ui.value / 200.0);
+          renderMap();
+        }
+      });
+
+      // switch to toggle hillshading
+      $('.t_HillShading').click(function() {
+        checkbox = $('.t_HillShading input');
+        if (dem.getHillShading()) {
+          dem.setHillShading(false);
+          checkbox.prop('checked', false);
+          $('.shadingControls').hide('blind', 300);
+        } else {
+          dem.setHillShading(true);
+          checkbox.prop('checked', true);
+          $('.shadingControls').show('blind', 300);
+        }
+        renderMap();
+      });
+
       // set angle to rotate map view
       $('.rotateView').knob({
         'width': 60,
@@ -198,6 +212,19 @@
           view.setRotation(toRadians(toStep(v, angleSteps)));
           renderMap();
         }
+      });
+
+      // switch to activate testing mode
+      $('.t_Testing').click(function() {
+        checkbox = $('.t_Testing input');
+        if (dem.getTesting()) {
+          dem.setTesting(false);
+          checkbox.prop('checked', false);
+        } else {
+          dem.setTesting(true);
+          checkbox.prop('checked', true);
+        }
+        renderMap();
       });
 
       // update control tool rotateView when rotated with alt+shift+mouse ol interaction

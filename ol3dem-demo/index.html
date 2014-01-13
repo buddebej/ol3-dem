@@ -69,21 +69,32 @@
                 <p>Shading</p>
             </div>
             <div class="controlBody">
-                <div class="floatBox">
-                    <p>Zenith (&deg;)</p>
-                    <div class="knob">
-                        <input type="text" class="lightZenith" data-cursor=true>
+                   <div class="shadingControls">
+
+                    <div class="floatBox">
+                        <p>Zenith (&deg;)</p>
+                        <div class="knob">
+                            <input type="text" class="lightZenith" data-cursor=true>
+                        </div>
                     </div>
-                </div>
-                <div class="floatBox">
-                    <p>Azimuth (&deg;)</p>
-                    <div class="knob">
-                        <input type="text" class="lightAzimuth" data-cursor=true>
+                    <div class="floatBox">
+                        <p>Azimuth (&deg;)</p>
+                        <div class="knob">
+                            <input type="text" class="lightAzimuth" data-cursor=true>
+                        </div>
                     </div>
-                </div>
-                <div class="clearFloat"></div>
+                    <div class="clearFloat"></div>
+                    <p>Ambient Light</p>
+                    <div class="ambientLightSlider"></div>
+                    <div id="ambientLight">
+                        <div class="scaleMin">-</div>
+                        <div class="scaleMax">+</div>
+                        <div class="clearFloat"></div>
+                    </div>   
+                    </div>
                 <div class="checkbox t_HillShading">
-                    <input type="checkbox"> Compute Shading</div>
+                    <input type="checkbox"> Compute Shading
+                </div>                                 
             </div>
 
             <div class="controlHeader">
@@ -97,9 +108,13 @@
                     </div>
                 </div>
                 <div class="floatBox floatBoxWide">
-                    <span>Or press Alt+Shift and drag map with mouse to rotate.</span>
+                    <span>Or press Alt+Shift and drag map with mouse to rotate.
                 </div>
                 <div class="clearFloat"></div>
+
+                <div class="checkbox t_Testing">
+                <input type="checkbox"><span>Enable Testing mode.</span></div>
+
             </div>
         </div>
          <div class="controlBoxFooter">

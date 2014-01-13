@@ -13,10 +13,68 @@ uniform float u_tileSizeM;
 varying vec2 v_texCoord;
 
 float decodeElevation(in vec4 colorChannels) {
-	// decode input data values
+	// decode input data elevation value
  	float elevationM = ((colorChannels.r*255.0 + (colorChannels.g*255.0)*256.0)-11000.0)/10.0;
     return elevationM;
 }
+
+vec4 decodeTextureColor(in vec4 colorChannels) {
+		// decode input data color value
+		int i1 = int(colorChannels.b*255.0);
+		int i2 = int(colorChannels.a*255.0);
+
+        int r = 0;
+        int g = 0;
+        int b = 0;
+        
+        if (i1 >= 128) {
+            i1 -= 128;
+            r += 16;
+        }
+        if (i1 >= 64) {
+            i1 -= 64;
+            r += 8;
+        }
+        if (i1 >= 32) {
+            i1 -= 32;
+            r += 4;
+        }
+        if (i1 >= 16) {
+            i1 -= 16;
+            r += 2;
+        }
+        if (i1 >= 8) {
+            i1 -= 8;
+            r += 1;
+        }      
+        // read bits 3 to 1
+        if (i1 >= 4) {
+            i1 -= 4;
+            g += 32;
+        }
+        if (i1 >= 2) {
+            i1 -= 2;
+            g += 16;
+        }
+        if (i1 >= 1) {
+            g += 8;
+        }  
+        if (i2 >= 128) {
+            i2 -= 128;
+            g += 4;
+        }
+        if (i2 >= 64) {
+            i2 -= 64;
+            g += 2;
+        }
+        if (i2 >= 32) {
+            i2 -= 32;
+            g += 1;
+        }
+        b = i2;
+        return vec4(float(r*8)/255.0,float(g*4)/255.0,float(b*8)/255.0,1.0);
+}
+
 
 //! VERTEX
 
@@ -72,6 +130,9 @@ uniform bool u_hillShading;
 
 // direction of light source
 uniform vec3 u_light; 
+
+// intensity of ambient light
+uniform float u_ambient_light; 
 
 // number of vertices per edge
 uniform float u_meshResolution; 
@@ -146,6 +207,10 @@ void main(void) {
 		}
 	} 
 
+	if(u_testing){
+		//hypsoColor = decodeTextureColor(texture2D(u_texture, m_texCoord.xy));
+	}
+
 // computation of hillshading
 	if(u_hillShading){
 		// transform to meter coordinates for normal computation
@@ -156,38 +221,39 @@ void main(void) {
 		vec3 normal = normalize(cross(neighbourRight -currentV,neighbourBelow-currentV));
 
 		// compute hillShade with help of u_light and normal and blend hypsocolor with hillShade
-		float hillShade = max(dot(normal,normalize(u_light)),0.0);
+		float hillShade = clamp(u_ambient_light * 1.0+ max(dot(normal,normalize(u_light)),0.0),0.0,1.0);
 		gl_FragColor = hypsoColor * vec4(hillShade,hillShade,hillShade,1.0);
 	} else {
 		// apply only hypsometric color
 		gl_FragColor = hypsoColor;
 	}
 
+
+
 // testing mode
 	if(u_testing){
-		if(!gl_FrontFacing){
-		//gl_FragColor = vec4(0.7,0.2,0.4,1.0);
-		discard;
-		}		
-		if(m_texCoord.x >= 0.99){
+
+		float lineWidth = 3.0 * CELLSIZE;
+		if(m_texCoord.x >= 1.0-lineWidth){
 	        gl_FragColor = vec4(0.0,0.0,1.0,1.0);
 		}
-		if(m_texCoord.x <= 0.01){
+		if(m_texCoord.x <= lineWidth){
 	        gl_FragColor = vec4(1.0,0.0,0.0,1.0);
 		}
-		if(m_texCoord.y <= 0.01){
+		if(m_texCoord.y <= lineWidth){
 	        gl_FragColor = vec4(0.0,1.0,0.0,1.0);
 		}
-		if(m_texCoord.y >= 0.99){
+		if(m_texCoord.y >= 1.0-lineWidth){
 	        gl_FragColor = vec4(0.0,0.5,0.5,1.0);
-		} 	
-		if(m_texCoord.y >= 0.5){
-			gl_FragColor.a = 0.8;
+		} 
 
-        //gl_FragColor.r = 1.0;
+		if(mod(m_texCoord.x,65.0*CELLSIZE) < CELLSIZE){
+	       gl_FragColor = vec4(0.9,0.9,0.9,0.1);
 		}
-		if(m_texCoord.y <= 0.5){
-        //gl_FragColor.g = 1.0;
+
+		if(mod(m_texCoord.y,65.0*CELLSIZE) < CELLSIZE){
+	       gl_FragColor = vec4(0.9,0.9,0.9,0.1);
 		}
+
 	}
 }

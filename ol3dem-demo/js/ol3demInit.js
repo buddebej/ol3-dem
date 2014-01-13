@@ -7,8 +7,9 @@
           attributions: [new ol.Attribution({
             html: '<a href="http://www.eea.europa.eu/data-and-maps/data/eu-dem" target="_blank">Produced using Copernicus data and information funded by the European Union - EU-DEM layers</a>'
           })],
-          //url: 'data/tiles/{z}/{x}/{y}.png' 
-          url: 'data/tiles/toner/{z}/{x}/{y}.png' 
+          url: 'data/tiles/{z}/{x}/{y}.png' 
+          //url: 'data/tiles/watercolor2/{z}/{x}/{y}.png' 
+          //url: 'data/tiles/toner/{z}/{x}/{y}.png' 
         })
       });
 

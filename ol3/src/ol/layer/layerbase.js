@@ -29,6 +29,7 @@ ol.layer.LayerProperty = {
   HILL_SHADING : 'hillShading',
   LIGHT_ZENITH: 'lightZenith',
   LIGHT_AZIMUTH: 'lightAzimuth',
+  AMBIENT_LIGHT: 'ambientLight',
   TESTING: 'testing',
   RESOLUTION : 'resolution'
 };
@@ -50,6 +51,7 @@ ol.layer.LayerProperty = {
  *            waterBodies: boolean,
  *            lightZenith: number,
  *            lightAzimuth: number,
+ *            ambientLight: number,
  *            testing: boolean,
  *            resolution: number,
  *            hillShading: boolean}}
@@ -106,6 +108,9 @@ ol.layer.Base = function(options) {
   /** @type {number} */
   values.lightAzimuth = goog.isDef(values.lightAzimuth) ?
     values.lightAzimuth : 225;
+  /** @type {number} */
+  values.ambientLight = goog.isDef(values.ambientLight) ?
+    values.ambientLight : 0.0;    
  /** @type {boolean} */
   values.testing = goog.isDef(values.testing) ?
     values.testing : false;   
@@ -130,6 +135,7 @@ ol.layer.Base = function(options) {
       ol.Object.getChangeEventType(ol.layer.LayerProperty.WATER_BODIES),
       ol.Object.getChangeEventType(ol.layer.LayerProperty.LIGHT_ZENITH),
       ol.Object.getChangeEventType(ol.layer.LayerProperty.LIGHT_AZIMUTH),
+      ol.Object.getChangeEventType(ol.layer.LayerProperty.AMBIENT_LIGHT),      
       ol.Object.getChangeEventType(ol.layer.LayerProperty.TESTING),
       ol.Object.getChangeEventType(ol.layer.LayerProperty.RESOLUTION),
       ol.Object.getChangeEventType(ol.layer.LayerProperty.HILL_SHADING)                             
@@ -207,6 +213,7 @@ ol.layer.Base.prototype.getLayerState = function() {
   var waterBodies = this.getWaterBodies();
   var lightZenith = this.getLightZenith();
   var lightAzimuth = this.getLightAzimuth();
+  var ambientLight = this.getAmbientLight();  
   var testing = this.getTesting();  
   var resolution = this.getResolution();  
   var hillShading = this.getHillShading();  
@@ -226,6 +233,7 @@ ol.layer.Base.prototype.getLayerState = function() {
     waterBodies: goog.isDef(waterBodies) ? waterBodies : true,
     lightZenith: goog.isDef(lightZenith) ? lightZenith : 45,
     lightAzimuth: goog.isDef(lightAzimuth) ? lightAzimuth : 225,
+    ambientLight: goog.isDef(ambientLight) ? ambientLight : 0.0,    
     resolution: goog.isDef(resolution) ? resolution : 1,    
     testing: goog.isDef(testing) ? testing : false,
     hillShading: goog.isDef(hillShading) ? hillShading : true}    
@@ -587,6 +595,29 @@ goog.exportProperty(
   ol.layer.Base.prototype,
   'getLightAzimuth',
   ol.layer.Base.prototype.getLightAzimuth);
+
+/**
+ * @param {number} ambientLight Ambientlight.
+ */
+ol.layer.Base.prototype.setAmbientLight = function(ambientLight) {
+  this.set(ol.layer.LayerProperty.AMBIENT_LIGHT, ambientLight);
+};
+goog.exportProperty(
+  ol.layer.Base.prototype,
+  'setAmbientLight',
+  ol.layer.Base.prototype.setAmbientLight);
+
+/**
+ * @return {number} Ambientlight.
+ */
+ol.layer.Base.prototype.getAmbientLight = function() {
+  return /** @type {number} */ (
+    this.get(ol.layer.LayerProperty.AMBIENT_LIGHT));
+};
+goog.exportProperty(
+  ol.layer.Base.prototype,
+  'getAmbientLight',
+  ol.layer.Base.prototype.getAmbientLight);
 
 /**
  * @param {number} resolution Resolution of Mesh.
