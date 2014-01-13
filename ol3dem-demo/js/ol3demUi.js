@@ -1,56 +1,58 @@
-    var ol3demUi = function(layer, view) {
+    var Ol3demUi = function(dem, view, map) {
+      'use strict';
 
-      // makes controlBox visible
       $('.controlBox').show();
 
-      var dem = layer,
-        view = view;
-      // init map controls
-      this.angleSteps = 1.0;
-      this.inclination = 50.0;
-      this.lightAzimuth = 225.0;
-      this.lightZenith = 45.0;
-      this.ambientLight = 0;
-      this.waterBodies = true;
-      this.testing = false;
-      this.colorScale = [0, 3000];
-      this.maxElevation = 4900;
-      this.resolution = 100;
-      this.hillShade = true;
+      var ui = this;
+      
+      // initial options for the ui
+      ui.option = {
+          'angleSteps' : 1.0,
+          'inclination' : 50.0,
+          'lightAzimuth' : 225.0,
+          'lightZenith' : 45.0,
+          'ambientLight' : 0,
+          'waterBodies' : true,
+          'testing' : false,
+          'colorScale' : [0, 3000],
+          'maxElevation' : 4900,
+          'resolution' : 100,
+          'hillShade' : true
+      };
+     
+      dem.setObliqueInclination(ui.option.inclination);
+      dem.setColorScale(ui.option.colorScale);
+      dem.setLightAzimuth(ui.option.azimuth);
+      dem.setLightZenith(ui.option.zenith);
+      dem.setAmbientLight(ui.option.ambientLight / 100.0);
+      dem.setWaterBodies(ui.option.waterBodies);
+      dem.setTesting(ui.option.testing);
+      dem.setResolution(ui.option.resolution / 100.0);
+      dem.setHillShading(ui.option.hillShade);
 
-      dem.setObliqueInclination(this.inclination);
-      dem.setColorScale(this.colorScale);
-      dem.setLightAzimuth(this.azimuth);
-      dem.setLightZenith(this.zenith);
-      dem.setAmbientLight(this.ambientLight / 100.0);
-      dem.setWaterBodies(this.waterBodies);
-      dem.setTesting(this.testing);
-      dem.setResolution(this.resolution / 100.0);
-      dem.setHillShading(this.hillShade);
-
-      $('.t_Testing input').prop('checked', this.testing);
-      $('.t_WaterBodies input').prop('checked', this.waterBodies);
-      $('.t_HillShading input').prop('checked', this.waterBodies);
-      $('.inclination').val(this.inclination);
-      $('.lightAzimuth').val(this.lightAzimuth);
-      $('.lightZenith').val(this.lightZenith);
-      $('#colorScale .scaleMin').text(this.colorScale[0]);
-      $('#colorScale .scaleMax').text(this.colorScale[1]);
+      $('.t_Testing input').prop('checked', ui.option.testing);
+      $('.t_WaterBodies input').prop('checked', ui.option.waterBodies);
+      $('.t_HillShading input').prop('checked', ui.option.waterBodies);
+      $('.inclination').val(ui.option.inclination);
+      $('.lightAzimuth').val(ui.option.lightAzimuth);
+      $('.lightZenith').val(ui.option.lightZenith);
+      $('#colorScale .scaleMin').text(ui.option.colorScale[0]);
+      $('#colorScale .scaleMax').text(ui.option.colorScale[1]);
 
       // FIXME: Find proper way to trigger re-rendering of map.
-      renderMap = function() {
+      var renderMap = function() {
         var center = view.getCenter();
         view.setCenter([0, 0]);
         view.setCenter(center);
       },
 
       // round given number to closest step
-      toStep = function(n, step) {
-        var rest = n % step;
-        if (rest <= (step / 2)) {
+      toStep = function(n) {
+        var rest = n % ui.option.angleSteps;
+        if (rest <= (ui.option.angleSteps / 2)) {
           return n - rest;
         } else {
-          return n + step - rest;
+          return n + ui.option.angleSteps - rest;
         }
       },
       toRadians = function(a) {
@@ -77,15 +79,16 @@
         }
       });
 
-      // set inclination for plan oblique relief
+      // set inclination for planoblique relief
       $('.inclination').knob({
         'width': 110,
         'height': 70,
         'max': 90,
         'min': 10,
-        'value': this.inclination,
-        'step': angleSteps,
+        'value': ui.option.inclination,
+        'step': ui.option.angleSteps,
         'thickness': '.15',
+        'readOnly': false,
         'angleOffset': -90,
         'angleArc': 90,
         'cursor': 5,
@@ -101,8 +104,8 @@
       // slider to stretch hypsometric colors  
       $('.colorSlider').slider({
         min: 0,
-        max: this.maxElevation,
-        values: this.colorScale,
+        max: ui.option.maxElevation,
+        values: ui.option.colorScale,
         range: true,
         slide: function(event, ui) {
           dem.setColorScale(ui.values);
@@ -112,20 +115,20 @@
         }
       });
 
-      // slider to stretch hypsometric colors  
+      // slider to stretch resolution of dem mesh
       $('.resolutionSlider').slider({
         min: 1,
         max: 100,
-        value: this.resolution,
+        value: ui.option.resolution,
         slide: function(event, ui) {
           dem.setResolution(ui.value / 100.0);
           renderMap();
         }
       });
 
-      // switch to toggle blue colors for waterbodies
+      // switch to toggle detection of inland waterbodies
       $('.t_WaterBodies').click(function() {
-        checkbox = $('.t_WaterBodies input');
+        var checkbox = $('.t_WaterBodies input');
         if (dem.getWaterBodies()) {
           dem.setWaterBodies(false);
           checkbox.prop('checked', false);
@@ -142,12 +145,13 @@
         'height': 60,
         'max': 360,
         'min': 0,
-        'step': angleSteps,
+        'step': ui.option.angleSteps,
         'thickness': '.3',
+        'readOnly': false,
         'fgColor': '#888888',
         'bgColor': '#000000',
         'change': function(v) {
-          dem.setLightAzimuth(toStep(v, angleSteps));
+          dem.setLightAzimuth(toStep(v));
           renderMap();
         }
       });
@@ -158,8 +162,9 @@
         'height': 70,
         'max': 90,
         'min': 0,
-        'step': angleSteps,
+        'step': ui.option.angleSteps,
         'thickness': '.15',
+        'readOnly': false,        
         'angleOffset': -90,
         'angleArc': 90,
         'cursor': 5,
@@ -167,25 +172,25 @@
         'bgColor': '#000000',
         'fgColor': '#888888',
         'change': function(v) {
-          dem.setLightZenith(toStep(v, angleSteps));
+          dem.setLightZenith(toStep(v));
           renderMap();
         }
       });
 
-      // slider to stretch hypsometric colors  
+      // slider to adjust the intensity of an ambient light
       $('.ambientLightSlider').slider({
         min: -100,
         max: 100,
-        value: this.ambientLight,
+        value: ui.option.ambientLight,
         slide: function(event, ui) {
           dem.setAmbientLight(ui.value / 200.0);
           renderMap();
         }
       });
 
-      // switch to toggle hillshading
+      // switch to toggle shading
       $('.t_HillShading').click(function() {
-        checkbox = $('.t_HillShading input');
+        var checkbox = $('.t_HillShading input');
         if (dem.getHillShading()) {
           dem.setHillShading(false);
           checkbox.prop('checked', false);
@@ -204,19 +209,20 @@
         'height': 60,
         'max': 360,
         'min': 0,
-        'step': angleSteps,
+        'step': ui.option.angleSteps,
         'thickness': '.3',
+        'readOnly': false,        
         'fgColor': '#888888',
         'bgColor': '#000000',
         'change': function(v) {
-          view.setRotation(toRadians(toStep(v, angleSteps)));
+          view.setRotation(toRadians(toStep(v)));
           renderMap();
         }
       });
 
       // switch to activate testing mode
       $('.t_Testing').click(function() {
-        checkbox = $('.t_Testing input');
+        var checkbox = $('.t_Testing input');
         if (dem.getTesting()) {
           dem.setTesting(false);
           checkbox.prop('checked', false);
@@ -226,6 +232,11 @@
         }
         renderMap();
       });
+
+      //$('.rotateView').focusout(function(){
+      //   $('.rotateView').trigger('change');
+      //   console.log("ocus out");
+      //});
 
       // update control tool rotateView when rotated with alt+shift+mouse ol interaction
       // should probably better be solved with ol.MapBrowserEvent / ol.dom.input
@@ -240,6 +251,9 @@
         $('.rotateView').val(angle).trigger('change');
       });
 
+//
+// EXPORT FUNCTIONALITY
+//
       // export functionality, causes memory problems in chrome
       // preserveDrawingBuffer has to be true for canvas (webglmaprenderer.js)
       // add following lines to ui
@@ -259,6 +273,4 @@
         var info = document.getElementById('no-download');
         info.style.display = '';
       }*/
-
-
-    };
+};
