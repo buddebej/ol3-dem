@@ -1,7 +1,7 @@
   $(document).ready(function() {
     'use strict';
 
-    var dem, ol3View, ol3Map, ol3demUi;
+    var dem, ol3View, ol3Map, ol3demUi, osm;
 
     if (webgl_detect()) {
 
@@ -10,10 +10,14 @@
           attributions: [new ol.Attribution({
             html: '<a href="http://www.eea.europa.eu/data-and-maps/data/eu-dem" target="_blank">Produced using Copernicus data and information funded by the European Union - EU-DEM layers</a>'
           })],
-          url: 'data/tiles/{z}/{x}/{y}.png'
-          //url: 'data/tiles/watercolor2/{z}/{x}/{y}.png' 
+          //url: 'data/tiles/{z}/{x}/{y}.png'
+          url: 'data/tiles/watercolor/{z}/{x}/{y}.png'
           //url: 'data/tiles/toner/{z}/{x}/{y}.png' 
         })
+      });
+
+      osm = new ol.layer.Tile({
+        source: new ol.source.OSM()
       });
 
       ol3View = new ol.View2D({
@@ -27,8 +31,18 @@
           new ol.control.ScaleLine(),
         ]),
         target: 'map',
+         //renderer: ol.RendererHint.CANVAS,
         renderers: ol.RendererHints.createFromQueryData(),
-        layers: [dem],
+        layers: [dem//, 
+        //new ol.layer.Tile({
+          //source: new ol.source.TileDebug({
+            //projection: 'EPSG:3857',
+            //tileGrid: new ol.tilegrid.XYZ({
+              //maxZoom: 22
+            //})
+          //})
+        //})
+        ],
         view: ol3View
       });
 

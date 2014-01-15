@@ -7,7 +7,7 @@
         font: 8pt Verdana;
         border:5px solid #e1e1e1;
         display: none;
-        width:180px;
+        width: 180px;
     }
     .controlBox a:link,a:visited,a:active {color:#000000;text-decoration: none; font-weight: bold;}     
     .controlBox a:hover {color:#000000;text-decoration: underline;}  
@@ -105,4 +105,10 @@
         height:60px;
         padding:5px;
     }
-  
+    select {
+        padding:0.1em;
+        border : 2px #999999 solid;
+        background-color: #ffffff;
+        font-size: 9pt;
+        width: 100%;
+    }  
