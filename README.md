@@ -21,4 +21,4 @@ A [working demo](http://ol3dem.boeppe.eu/) is currently available for the eu-dem
 Click here for working demo [http://ol3dem.boeppe.eu/](http://ol3dem.boeppe.eu/)
 Works best in chrome and make sure your browser allows webgl.
 
-![Screenshots](http://ol3dem.boeppe.eu/ol3-dem-screenshot.png) 
+![Screenshots](https://raw.github.com/buddebej/ol3-dem/master/screenshots/ol3-dem-screenshot.png) 
