@@ -14,7 +14,7 @@ Features at current stage:
  * Hillshading
 
 The input data has to be encoded and converted into a set of tiles before it can be read by ol3. Regular raster dems such as GeoTiff can be used.
-For data preprocessing see the scripts in dem-preprocessing. For the actual tile production we used a modified version of [tiler-tools](https://code.google.com/p/tilers-tools/).
+For data preprocessing we used [dem2tiles](https://github.com/buddebej/dem2tiles). For the actual tile production a modified version of [tiler-tools](https://code.google.com/p/tilers-tools/) was used.
 
 A [working demo](http://ol3dem.boeppe.eu/) is currently available for the eu-dem (Digital Elevation Model of the European Environment Agency).
 
