@@ -1,5 +1,5 @@
-dem-preprocessing tools
-=======================
+##dem-preprocessing tools
+
 
 Both tile_border_neighbours.py and tile_colorencode.py are standalone tools and can be used independently. 
 
@@ -22,18 +22,18 @@ To ensure that no artefacts occur during the resampling of the images the order 
 * tile_colorencode.py
 (encodes up to Float32 values in tif and write into two 8 bit bands of a png)
 
-###############################################################################
 
-###Usage
+##Usage
 
 ```
 ./batch_dem2tiles.py -i my_dem.vrt -o outputData/ -m -v
 ```
 
-###batch_dem2tiles.py
+##batch_dem2tiles.py
 
 See the help with batch_dem2tiles.py -h.
 
+```
 usage: batch_dem2tiles.py [-h] (-i DEMINPUT | -x TILEINPUT) -o OUTPUT
                           [-n DSTNODATA] [-s SCHEME] [-m] [-t THREADS]
                           [-b BUFFER] [-a] [-tf] [-v]
@@ -67,7 +67,7 @@ optional arguments:
   -a, --archive         Creates tar archive of tileset (default false).
   -tf, --temp           Keep temporary files (default false).
   -v, --verbose         Allow verbose console output (default false).
-
+```
 
 
 
