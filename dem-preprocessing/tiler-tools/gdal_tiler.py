@@ -53,7 +53,8 @@ def process_src(src_def):
 #----------------------------
     global options
     opt = LooseDict(options)
-    opt.tile_ext = '.' + opt.tile_format.lower()
+    opt.tile_format = opt.tile_format.lower()
+    opt.tile_ext = '.' + opt.tile_format
     src, delete_src = src_def
     opt.delete_src = delete_src
 
@@ -134,8 +135,12 @@ def parse_args(arg_lst):
         help='give an output file name after a map name (from metadata)')
     parser.add_option("-m", "--after-map", action="store_true",
         help='give an output file name  after name of a map file, otherwise after a name of an image file')
+    parser.add_option("--skip-invalid", action="store_true",
+        help='skip invalid/unrecognized source')
 
-    return parser.parse_args(arg_lst)
+    (options, args) = parser.parse_args(arg_lst)
+
+    return (options, args)
 
 #----------------------------
 
@@ -152,26 +157,22 @@ def main(argv):
     ld(os.name)
     ld(options)
 
-    if options.verbose == 2:
-        set_nothreads()
-
     if options.list_profiles:
         Pyramid.profile_lst(tty=True)
-        sys.exit(0)
+        return
+
+    if not args:
+        logging.error('No input file(s) specified')
+        sys.exit(1)
+
+    if options.verbose == 2:
+        set_nothreads()
 
     if options.release:
         options.overview_resampling, options.base_resampling = ('antialias', 'cubic')
 
-    if not args:
-        parser.error('No input file(s) specified')
-    try:
-        sources = args
-    except:
-        raise Exception("No sources specified")
-
-    res = parallel_map(preprocess_src, sources)
+    res = parallel_map(preprocess_src, args)
     parallel_map(process_src, flatten(res))
-    pf('')
 
 # main()
 

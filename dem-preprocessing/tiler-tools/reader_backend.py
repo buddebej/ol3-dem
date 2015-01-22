@@ -196,8 +196,9 @@ class SrcLayer(object):
         self.name=self.get_name()
 
         self.img_file=self.get_raster()
-        logging.info(' %s : %s (%s)' % (self.map.file,self.name,self.img_file))
-        self.raster_ds = gdal.Open(self.img_file.encode(locale.getpreferredencoding()),GA_ReadOnly)
+        fname = self.img_file.encode(locale.getpreferredencoding())
+
+        self.raster_ds = gdal.Open(fname, GA_ReadOnly)
 
         self.dtm=None
         self.refs=self.get_refs()           # fetch reference points
@@ -209,12 +210,17 @@ class SrcLayer(object):
 
     def get_srs(self): # redefined in reader_kml.py
         'returns srs for the map, and DTM shifts if any'
+
+        logging.info(' %s : %s (%s)' % (self.map.file,self.name,self.img_file))
+
         options=self.map.options
         if options.srs:
+            logging.info(' %s' % (options.srs,))
             return(options.srs,None)
+
+        logging.info(' %s, %s' % (self.get_datum_id(),self.get_proj_id()))
         dtm=None
         proj4=[]
-        logging.info(' %s, %s' % (self.get_datum_id(),self.get_proj_id()))
 
         # compute chart's projection
         if options.proj:
@@ -303,14 +309,14 @@ class SrcLayer(object):
 
         return dst_file
 
-    gmt_templ = (
-        '# @VGMT1.0 @GPOLYGON'
-        '# @Jp"%s"'
-        '# FEATURE_DATA'
-        '>'
-        '# @P'
+    gmt_templ = '\n'.join((
+        '# @VGMT1.0 @GPOLYGON',
+        '# @Jp"%s"',
+        '# FEATURE_DATA',
+        '>',
+        '# @P',
         '%s'
-        )
+        ))
 
     def cut_poly(self,dst_ds):
         plys=self.get_plys()

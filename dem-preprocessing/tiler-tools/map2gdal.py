@@ -43,25 +43,44 @@ import reader_kml
 options = None
 
 def process_src(src, no_error=False, opt=None):
+    """
+    if source is converted successfully returns
+        (<generated VRT file>, True)
+    otherwise returns
+        (<source>, False)
+    """
     global options
 
     src = src.decode(locale.getpreferredencoding(),'ignore')
 
+    if not opt:
+        opt = LooseDict(options)
+
     with open(src,'rU') as f:
         lines=[f.readline() for i in range(30)]
+
+    err_msg = None
     for cls in reader_backend.reader_class_map:
         patt=cls.magic
         if any((l.startswith(patt) for l in lines)):
-            break
+            try:
+                res = [(layer.convert(), True) for layer in cls(src,options=opt).get_layers()]
+                return res
+            except RuntimeError as exc:
+                err_msg = exc.message
+                if not no_error:
+                    raise
     else:
-        if not no_error:
-            logging.error(" Invalid file: %s" % src)
-        return [(src, False)]
+        if no_error:
+            return [(src, False)]
+        if err_msg is None:
+            err_msg = '*** %s' % exc.message
+        if self.options.skip_invalid:
+            logging.error(err_msg)
+            return False
+        else:
+            raise RuntimeError(err_msg)
 
-    if not opt:
-        opt = LooseDict(options)
-    res = [(layer.convert(), True) for layer in cls(src,options=opt).get_layers()]
-    return res
 
 parser = None
 #----------------------------
@@ -98,6 +117,8 @@ def parse_args(arg_lst):
         help='give an output file name  after name of a map file, otherwise after a name of an image file')
     parser.add_option("-l", "--long-name", action="store_true",
         help='give an output file a long name')
+    parser.add_option("--skip-invalid", action="store_true",
+        help='skip invalid/unrecognized source')
     parser.add_option("-d", "--debug", action="store_true", dest="debug")
     parser.add_option("-q", "--quiet", action="store_true", dest="quiet")
 #    parser.add_option("--last-column-bug", action="store_true",

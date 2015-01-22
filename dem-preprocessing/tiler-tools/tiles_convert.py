@@ -34,7 +34,7 @@ import converter_xyz
 import converter_maemomapper
 import converter_sasplanet
 try:
-    import converter_mmap
+    import converter_mmaps
 except ImportError:
     pass
 
@@ -64,8 +64,12 @@ def main(argv):
         description='copies map tiles from one structure to another')
     parser.add_option('--from', dest='in_fmt', default='zyx',
         help='input tiles profile (default: zyx)')
-    parser.add_option('--to', dest='out_fmt', default='mmap',
-        help='output tiles profile (default: mmap)')
+    if converter_mmaps:
+        parser.add_option('--to', dest='out_fmt', default='mmaps',
+            help='output tiles profile (default: mmaps)')
+    else:
+        parser.add_option('--to', dest='out_fmt', default=None,
+            help='output tiles profile (default: None)')
     parser.add_option('--list-profiles', '--lp', action='store_true',
         help='list available profiles')
     parser.add_option('-f', '--tile-format', dest='convert_tile', metavar='FORMAT',

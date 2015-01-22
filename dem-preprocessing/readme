@@ -10,7 +10,7 @@ Optionally you would need tar to create archives of the tilesets.
 
 To ensure that no artefacts occur during the resampling of the images the order of the workflow has to be:
 
-* tiler-tools (http://code.google.com/p/tilers-tools/)
+* tiler-tools (http://code.google.com/p/tilers-tools/, using version 3.2)
 (creates tif tiles of a dem in a gdal readable format)
 
 * tile_border_neighbours.py 
@@ -58,15 +58,6 @@ optional arguments:
   -a, --archive         Creates tar archive of tileset (default false).
   -tf, --temp           Keep temporary files (default false).
   -v, --verbose         Allow verbose console output (default false).
-
-#################################################################################
-
-tiler-tools 3.0
-
-Unfortunately there currently (Dec 2013) is a problem with tiler-tools, when it comes to process the complete srtm dataset.
-The problem is fixed but the latest version has to be tested.
-
-The used version of tiler-tools was modified to support float values.
 
 
 

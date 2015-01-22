@@ -97,7 +97,7 @@ class ZYXtiling(XYZtiling):
         'relative path to a tile'
     #----------------------------
         z, x, y = tile
-        return '%i/%i/%i%s' % (z, y, x, self.tile_ext)
+        return 'z%i/%i/%i%s' % (z, y, x, self.tile_ext)
 
 #############################
 
@@ -111,10 +111,9 @@ class BaseImg(object):
         self.transparency = transparency
 
         self.size = self.ds.RasterXSize, self.ds.RasterYSize
-        self.bands = [self.ds.GetRasterBand(i+1) for i in range(self.ds.RasterCount-1)] # verhindern dass der zweite kanal geladen wird
-        stats = self.bands[0].GetStatistics(0, 1)
-        print(stats)
-
+        self.bands = [self.ds.GetRasterBand(i+1) for i in range(self.ds.RasterCount-1)] # planoblique: avoid loading of second channel
+        stats = self.bands[0].GetStatistics(0, 1) # planoblique: avoid loading of second channel
+        print(stats) # planoblique: avoid loading of second channel
     def __del__(self):
         del self.bands
         del self.ds
@@ -125,7 +124,7 @@ class BaseImg(object):
         ul = [corners[0][i]-self.world_ul[i] for i in (0, 1)]
         sz = [corners[1][i]-corners[0][i] for i in (0, 1)]
 
-        tile_bands = [bnd.ReadRaster(ul[0], ul[1], sz[0], sz[1], sz[0], sz[1], GDT_Float32)
+        tile_bands = [bnd.ReadRaster(ul[0], ul[1], sz[0], sz[1], sz[0], sz[1], GDT_Float32) # planoblique
                     for bnd in self.bands]
         n_bands = len(self.bands)
         if n_bands == 1:
@@ -138,7 +137,7 @@ class BaseImg(object):
                         return None, 0
                     else:                   # semi-transparent
                         opacity = -1
-            img = Image.frombuffer('F', sz, tile_bands[0], 'raw', 'F', 0, 1) # set mode to F (float)
+            img = Image.frombuffer('F', sz, tile_bands[0], 'raw', 'F', 0, 1) # planoblique
         else:
             aplpha = tile_bands[-1]
             if min(aplpha) == '\xFF':       # fully opaque
@@ -150,7 +149,7 @@ class BaseImg(object):
             else:                           # semi-transparent
                 opacity = -1
                 mode = 'RGBA' if n_bands > 2 else 'LA'
-            img = Image.merge(mode, [Image.frombuffer('L', sz, bnd, 'raw', 'L', 0, 1) for bnd in tile_bands]) 
+            img = Image.merge(mode, [Image.frombuffer('L', sz, bnd, 'raw', 'L', 0, 1) for bnd in tile_bands])
         return img, opacity
 # BaseImg
 
@@ -207,7 +206,7 @@ class Pyramid(object):
         # init tile grid parameters
     #----------------------------
 
-        self.proj_srs = self.srs # self.proj_srs may be changed later to avoid crossing longitude 180
+        self.proj_srs = txt2proj4(self.srs) # self.proj_srs may be changed later to avoid crossing longitude 180
         self.geog_srs = proj_cs2geog_cs(self.proj_srs)
         ld('proj, longlat', self.proj_srs, self.geog_srs)
 
@@ -257,17 +256,26 @@ class Pyramid(object):
         self.base_resampling = base_resampling_map[self.options.base_resampling]
         self.resampling = resampling_map[self.options.overview_resampling]
 
-        pf('\n%s -> %s '%(self.src, self.dest), end='')
+        #~ if self.options.verbose > 0:
+            #~ print('\n%s -> %s '%(self.src, self.dest), end='')
+        logging.info(' %s -> %s '%(self.src, self.dest))
 
         if os.path.isdir(self.dest):
             if self.options.noclobber and os.path.exists(self.dest):
-                pf('*** Target already exists: skipping', end='')
+                logging.error('Target already exists: skipping')
                 return False
             else:
                 shutil.rmtree(self.dest, ignore_errors=True)
 
         # connect to src dataset
-        self.get_src_ds()
+        try:
+            self.get_src_ds()
+        except RuntimeError as exc:
+            if self.options.skip_invalid:
+                logging.error('%s' % exc.message[:-1])
+                return False
+            else:
+                raise
 
         # calculate zoom range
         self.calc_zoom(zoom_parm)
@@ -308,12 +316,11 @@ class Pyramid(object):
     def get_src_ds(self):
         'get src dataset, convert to RGB(A) if required'
     #----------------------------
-        override_srs = self.options.srs
 
         self.src_path = self.src
         if os.path.exists(self.src):
             self.src_path = os.path.abspath(self.src)
-            pf('')
+            #~ pf('')
             ld('self.src_path',self.src_path, self.src)
 
         # check for source raster type
@@ -333,15 +340,15 @@ class Pyramid(object):
         if not src_proj and gcps :
             src_proj = txt2proj4(src_ds.GetGCPProjection())
 
-        if self.options.srs is not None:
-            src_proj = self.options.srs
+        override_srs = self.options.srs
+        if override_srs is not None:
+            src_proj = txt2proj4(override_srs)
 
         ld('src_proj', src_proj, 'src geotr', src_geotr)
         assert src_proj, 'The source does not have a spatial reference system assigned'
 
         src_bands = src_ds.RasterCount
         band1 = src_ds.GetRasterBand(1)
-
         if src_bands == 1 and band1.GetColorInterpretation() == GCI_PaletteIndex : # source is a paletted raster
             transparency = None
             if self.base_resampling == 'NearestNeighbour' and self.resampling == Image.NEAREST :
@@ -375,10 +382,7 @@ class Pyramid(object):
                 if gcps:
                     gcp_lst = '\n'.join((gcp_templ % (g.Id, g.GCPPixel, g.GCPLine, g.GCPX, g.GCPY, g.GCPZ)
                                         for g in gcps))
-                    if self.options.srs is None:
-                        gcp_proj = txt2proj4(src_ds.GetGCPProjection())
-                    else:
-                        gcp_proj = src_proj
+                    gcp_proj = txt2proj4(src_ds.GetGCPProjection()) if override_srs is None else src_proj
                     gcplst_txt = gcplst_templ % (gcp_proj, gcp_lst)
 
                 metadata = src_ds.GetMetadata()
@@ -431,6 +435,7 @@ class Pyramid(object):
             vrt_drv = gdal.GetDriverByName('VRT')
             self.src_ds = vrt_drv.CreateCopy(src_vrt, src_ds) # replace src dataset
 
+            ld('override_srs', override_srs, 'txt2wkt(override_srs)', txt2wkt(override_srs))
             self.src_ds.SetProjection(txt2wkt(override_srs)) # replace source SRS
             gcps = self.src_ds.GetGCPs()
             if gcps :
@@ -569,13 +574,12 @@ class Pyramid(object):
                 warp_options.append(w_option('CUTLINE_BLEND_DIST', self.options.blend_dist))
 
         src_bands = self.src_ds.RasterCount
-
         ld('src_bands', src_bands)
 
         # process nodata info
         src_nodata = None
         if self.options.src_nodata:
-            src_nodata = map(int, options.src_nodata.split(','))
+            src_nodata = map(int, self.options.src_nodata.split(','))
             assert len(src_nodata) == src_bands, 'Nodata must match the number of bands'
             if src_bands > 1:
                 warp_options.append(w_option('UNIFIED_SRC_NODATA', 'YES'))
@@ -620,7 +624,6 @@ class Pyramid(object):
             'wo_Cutline':       (warp_cutline % cut_wkt) if cut_wkt else '',
             }
 
-
         temp_vrt = os.path.join(self.dest, self.base+'.tmp.vrt') # auxilary VRT file
         self.temp_files.append(temp_vrt)
         with open(temp_vrt, 'w') as f:
@@ -628,14 +631,13 @@ class Pyramid(object):
 
         # warp base raster
         base_ds = gdal.Open(vrt_text, GA_ReadOnly)
-        pf('.', end='')
+        self.progress()
 
         # close datasets in a proper order
         del self.src_ds
 
         # create base_image raster
         self.base_img = BaseImg(base_ds, ul_pix, self.transparency)
-        
 
     #----------------------------
 
@@ -709,8 +711,9 @@ class Pyramid(object):
                 opacities for img, ch, opacities in top_results
                 ))
             ))
-
         write_transparency(self.dest, transparency)
+
+        self.progress(finished=True)
 
     #----------------------------
 
@@ -762,21 +765,25 @@ class Pyramid(object):
                 ch_mask=ch_img.split()[-1] if 'A' in ch_img.mode else None
 
                 if tile_img is None:
-                    if 'F' in ch_img.mode:
-                        tile_mode='F'
+                    if 'F' in ch_img.mode: # planoblique
+                        tile_mode = 'F'
+                    elif 'F' in ch_img.mode:
+                        tile_mode = 'F' + mode_opacity
                     else:
-                        tile_mode=('F' if 'F' in ch_img.mode else 'RGB')+mode_opacity # modified mode to F = float
+                        tile_mode = 'RGB' + mode_opacity
 
                     if self.transparency is not None:
                         tile_img=Image.new(tile_mode, img.size, self.transparency)
                     else:
                         tile_img=Image.new(tile_mode, img.size)
+
                     if self.palette is not None:
                         tile_img.putpalette(self.palette)
 
                 tile_img.paste(ch_img, ch_mozaic[ch], ch_mask)
                 ch_opacities.extend(opacity_lst)
 
+        #~ ld('proc_tile', tile, tile_img, opacity)
         if tile_img is not None and opacity != 0:
             self.write_tile(tile, tile_img)
 
@@ -795,9 +802,17 @@ class Pyramid(object):
             os.makedirs(os.path.dirname(full_path))
         except: pass
 
-        if self.options.paletted and self.tile_ext == '.png':
+        tile_format = self.options.tile_format
+        if self.options.paletted and tile_format == 'png':
             try:
                 tile_img = tile_img.convert('P', palette=Image.ADAPTIVE, colors=255)
+            except ValueError:
+                #ld('tile_img.mode', tile_img.mode)
+                pass
+        elif tile_img.mode == 'P' and tile_format in ('jpeg', 'webp'):
+            mode = 'RGB' # + 'A' if self.transparency else ''
+            try:
+                tile_img = tile_img.convert(mode)
             except ValueError:
                 #ld('tile_img.mode', tile_img.mode)
                 pass
@@ -807,7 +822,7 @@ class Pyramid(object):
         else:
             tile_img.save(full_path)
 
-        self.counter()
+        self.progress()
 
     #----------------------------
 
@@ -822,9 +837,8 @@ class Pyramid(object):
     def write_metadata(self, tile=None, children=[]):
 
     #----------------------------
-        if tile == None:
+        if tile is None:
             self.write_tilemap()
-            copy_viewer(self.dest)
 
     #----------------------------
 
@@ -1051,13 +1065,15 @@ class Pyramid(object):
     # progress display
     tick_rate = 50
     count = 0
-    def counter(self):
-        self.count += 1
-        if self.count % self.tick_rate == 0:
+    def progress(self, finished=False):
+        if self.options.verbose == 0:
+            pass
+        elif finished:
+            pf('')
+        elif self.count % self.tick_rate == 0:
             pf('.', end='')
-            return True
-        else:
-            return False
+        self.count += 1
+
 # Pyramid
 
 #----------------------------

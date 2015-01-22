@@ -67,17 +67,17 @@ class GeoNosLayer(SrcLayer):
 
     def get_dtm(self):
         'get DTM northing, easting'
-        dtm_parm=self.options.dtm_shift
-        denominator=3600 # seconds if options.dtm_shift
+        dtm_parm=self.map.options.dtm_shift
         if dtm_parm is None:
-            denominator=1 # degrees otherwise
             try:
-                dtm_parm=[self.hdr_parms(i)[0] for i in ('Longitude Offset','Latitude Offset')]
-                ld('DTM',dtm_parm)
-            except IndexError: # DTM not found
+                dtm = [float(self.hdr_parms(i)[0]) for i in ('Longitude Offset','Latitude Offset')]
+                ld('DTM',dtm)
+            except (IndexError, ValueError): # DTM not found
                 ld('DTM not found')
-                dtm_parm=[0,0]
-        dtm=[float(s)/denominator for s in dtm_parm]
+                return None
+        else:
+            denominator = 3600 # seconds if options.dtm_shift
+            dtm = [float(s)/denominator for s in dtm_parm]
         return dtm if dtm != [0,0] else None
 
     def get_refs(self):

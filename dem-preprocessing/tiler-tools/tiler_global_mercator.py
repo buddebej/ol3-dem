@@ -55,6 +55,12 @@ class GMercatorZYX(GMercator, ZYXtiling):
     profile = 'zyx'
     defaul_ext = '.zyx'
     tms_profile = 'zyx-mercator' # non-standard profile
+
+    def write_metadata(self, tile=None, children=[]):
+        super(GMercatorZYX, self).write_metadata(tile, children)
+
+        if tile is None:
+            copy_viewer(self.dest)
 #
 profile_map.append(GMercatorZYX)
 #

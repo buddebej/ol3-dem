@@ -73,7 +73,8 @@ class FileTile(Tile):
         self.temp = temp
 
     def data(self):
-        return open(self.path, 'rb').read()
+        with open(self.path, 'rb') as f:
+            return f.read()
 
     def get_ext(self):
         return os.path.splitext(self.path)[1]
@@ -102,19 +103,19 @@ class FileTileNoExt(FileTile):
 class PixBufTile(Tile):
 
 #############################
-    def __init__(self, coord, pixbuf, key=None):
+    def __init__(self, coord, pixbuf, key=None, dataType=None):
         super(PixBufTile, self).__init__(coord)
         self.pixbuf = pixbuf
+        self.data_type = dataType
 
     def data(self):
         return self.pixbuf
 
     def get_ext(self):
-        try:
+        if self.data_type:
+            ext = ext_from_mime(self.data_type)
+        else:
             ext = ext_from_buffer(self.pixbuf)
-        except KeyError:
-            error('PixBufTile: wrong data', self.coord())
-            raise
         return ext
 
     def copy2file(self, dest_path, link=False):
@@ -149,10 +150,13 @@ class TileConverter(object):
 
     def __call__(self, tile):
         'convert tile'
-        if tile.get_ext() in self.src_formats:
-            return self.convert_tile(tile)
-        else:
-            return tile # w/o conversion
+        try:
+            if tile.get_ext() in self.src_formats:
+                return self.convert_tile(tile)
+            else:
+                return tile # w/o conversion
+        except (EnvironmentError, KeyError):
+            return None
 
     @staticmethod
     def get_class(profile, isDest=False):
@@ -398,7 +402,8 @@ class TileSet(object):
             src = self.src
 
         for tile in src:
-            self.process_tile(tile)
+            if tile is not None:
+                self.process_tile(tile)
 
         if self.pool:
             self.pool.close()

@@ -26,7 +26,7 @@
 from __future__ import with_statement
 from __future__ import print_function
 
-version = '%prog version 2.x devel'
+version = '%prog version 3.1.0'
 
 import sys
 import os
@@ -93,7 +93,7 @@ def parallel_map(func, iterable):
     ld('parallel_map', multiprocessing)
     #~ return map(func, iterable)
 
-    if multiprocessing is None: # or len(iterable) < 2:
+    if multiprocessing is None or len(iterable) < 2:
         return map(func, iterable)
     else:
         # map in parallel
@@ -170,7 +170,8 @@ def command(params, child_in=None):
         process = Popen(params, stdin=PIPE, stdout=PIPE, stderr=PIPE, universal_newlines=True)
         (child_out, child_err) = process.communicate(child_in)
         if process.returncode != 0:
-            raise Exception("*** External program failed: %s\n%s" % (cmd_str, child_err))
+            error("*** External program error: %s\n%s" % (cmd_str, child_err))
+            raise EnvironmentError(process.returncode, child_err)
     ld('<', child_out, child_err)
     return child_out
 
@@ -260,9 +261,8 @@ def txt2srs(proj):
     if proj.startswith(("GEOGCS", "GEOCCS", "PROJCS", "LOCAL_CS")):
         srs.ImportFromWkt(proj)
     if proj.startswith('EPSG'):
-        #~ epsg = proj.split(':')[1]
-        #~ srs.importFromEPSG(epsg)
-        proj = '+init=' + proj.lower()
+        epsg = int(proj.split(':')[1])
+        srs.ImportFromEPSG(epsg)
     if proj.startswith('+'):
         srs.ImportFromProj4(proj)
     return srs
@@ -347,7 +347,7 @@ def shape2mpointlst(datasource, dst_srs, feature_name=None):
         return []
 
     drv_name = ds.GetDriver().GetName()
-    is_kml = drv_name == 'KML'
+    is_kml = 'KML' in drv_name
     ld('shape2mpointlst drv', drv_name, is_kml)
 
     n_layers = ds.GetLayerCount()
@@ -455,17 +455,22 @@ def write_tilemap(dst_dir, tilemap):
     with open(f, 'w') as f:
          json.dump(tilemap, f, indent=2)
 
+def link_or_copy(src, dst):
+        try:
+            if os.path.exists(dst):
+                os.remove(dst)
+            os.link(src, dst)
+        except (OSError, AttributeError): # non POSIX or cross-device link?
+            try:
+                shutil.copy(src, dst)
+            except shutil.Error, shutil_exception:
+                raise shutil_exception
+
 def copy_viewer(dest):
     for f in ['viewer-google.html', 'viewer-openlayers.html']:
         src = os.path.join(data_dir(), f)
         dst = os.path.join(dest, f)
-        try:
-            os.link(src, dst) # hard links as FF dereferences softlinks
-        except OSError: # non POSIX or cross-device link?
-            try:
-                shutil.copy(src, dst)
-            except shutil.Error:
-                pass
+        link_or_copy(src, dst) # hard links as FF dereferences softlinks
 
 def read_transparency(src_dir):
     try:
@@ -483,41 +488,45 @@ def write_transparency(dst_dir, transparency):
     except:
         logging.warning("transparency cache save failure")
 
-ext_map = (
-    ('\x89PNG\x0D\x0A\x1A\x0A', '.png'),
-    ('\xFF\xD8\xFF\xE0', '.jpg'),
-    ('GIF89a', '.gif'),
-    ('GIF87a', '.gif'),
-    ('RIFF', '.webp'),
+type_map = (
+    ('image/png', '.png', '\x89PNG\x0D\x0A\x1A\x0A'),
+    ('image/jpeg', '.jpg', '\xFF\xD8\xFF\xE0'),
+    ('image/jpeg', '.jpeg', '\xFF\xD8\xFF\xE0'),
+    ('image/gif', '.gif', 'GIF89a'),
+    ('image/gif', '.gif', 'GIF87a'),
+    ('image/webp', '.webp', 'RIFF'),
+    ('image/tif', '.tif', 'TIFF'),
     )
 
-def ext_from_buffer(buf):
-    for magic, ext in ext_map:
+def type_ext_from_buffer(buf):
+    for mime_type, ext, magic in type_map:
         if buf.startswith(magic):
             if magic == 'RIFF' and buf[8:12] != 'WEBP':
                 contnue
-            return ext
-    error('Cannot determing image type in a buffer: %s', buf[:20])
+            return mime_type, ext
+    error('Cannot determing image type in a buffer:', buf[:20])
     raise KeyError('Cannot determing image type in a buffer')
+
+def ext_from_buffer(buf):
+    return type_ext_from_buffer(buf)[1]
+
+def mime_from_ext(ext_to_find):
+    for mime_type, ext, magic in type_map:
+        if ext_to_find == ext:
+            return mime_type
+    else:
+        error('Cannot determing image MIME type')
+        raise KeyError('Cannot determing image MIME type')
+
+def ext_from_mime(mime_to_find):
+    for mime_type, ext, magic in type_map:
+        if mime_to_find == mime_type:
+            return ext
+    else:
+        error('Cannot determing image MIME type')
+        raise KeyError('Cannot determing image MIME type')
 
 def ext_from_file(path):
     with file(path, "r") as f:
         buf = f.read(512)
         return ext_from_buffer(buf)
-
-mime_map = {
-    '.png': 'image/png',
-    '.gif': 'image/gif',
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.webp': 'image/webp',
-    '.tif': 'image/tif'
-    }
-
-def mime_from_ext(ext):
-    try:
-        mime_type = mime_map[ext.lower()]
-        return mime_type
-    except KeyError:
-        error('Cannot determing image MIME type')
-        raise

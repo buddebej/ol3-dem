@@ -198,12 +198,16 @@ class MergeSet:
             if transp == 1 or not os.path.exists(dst_file):
                 # fully opaque or no destination tile exists yet
                 #~ pf('>', end='')
-                shutil.copy(src_file, dst_file)
+                link_or_copy(src_file, dst_file)
             else: # partially transparent, combine with destination (exists! see previous check)
                 pf('+', end='')
                 if not src_raster:
                     src_raster = Image.open(src_file).convert("RGBA")
-                dst_raster = Image.composite(src_raster, Image.open(dst_file).convert("RGBA"), src_raster)
+                try:
+                    dst_raster = Image.composite(src_raster, Image.open(dst_file).convert("RGBA"), src_raster)
+                except IOError, exception:
+                    error('merge_tile', exception.message, dst_file)
+
                 dst_raster.save(dst_file)
 
             if options.underlay and transp != 0:
@@ -216,7 +220,7 @@ class MergeSet:
 
     def merge_dirs(self):
 
-        transparency = parallel_map(self, self.sources.iterkeys())
+        transparency = parallel_map(self, self.sources.keys())
         self.sources = None
         self.sources = dict(transparency)
         if None in self.sources:

@@ -171,10 +171,10 @@ class BsbLayer(SrcLayer):
             datum=self.map.srs_defs['datum'][datum_id.upper()][0]
         except KeyError:
             # try to guess the datum by comment and copyright string(s)
-            crr=' '.join(self.hdr_parms('!')+self.hdr_parms('CRR'))
+            crr=(' '.join(self.hdr_parms('!')+self.hdr_parms('CRR'))).upper()
             try:
                 guess_dict = self.map.srs_defs['datum_guess']
-                datum=[guess_dict[crr_patt][0] for crr_patt in guess_dict if crr_patt in crr][0]
+                datum=[guess_dict[crr_patt][0] for crr_patt in guess_dict if crr_patt.upper() in crr][0]
                 logging.warning(' Unknown datum "%s", guessed as "%s"' % (datum_id,datum))
             except IndexError:
                 # datum still not found

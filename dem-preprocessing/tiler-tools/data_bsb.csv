@@ -1,5 +1,6 @@
 # datum_map
 datum, WGS84,               "+datum=WGS84",
+datum, WGS-84,              "+datum=WGS84",
 datum, NAD83,               "+datum=NAD83",
 datum, WGS72,               "+ellps=WGS72 +towgs84=0,0,4.5,0,0,0.554,0.219",
 datum, WGS1972,             "+ellps=WGS72 +towgs84=0,0,4.5,0,0,0.554,0.219",
@@ -19,6 +20,17 @@ datum, MERCHICH,            "+ellps=clrk80 +towgs84=31,146,47,0,0,0,0",
 datum, OSGB36,              "+towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 +ellps=airy",
 # http://sv.wikipedia.org/wiki/RT_90
 datum, RT90 (SWEDEN),       "+towgs84=414.0978567149,41.3381489658,603.0627177516,-0.8550434314,2.1413465185,-7.0227209516,0 +ellps=bessel",
+# http://spatialreference.org/ref/epsg/4218/proj4/
+datum, BOGOTÁ,              "+ellps=intl +towgs84=307,304,-318,0,0,0,0"
+# http://spatialreference.org/ref/epsg/4225/proj4/
+datum, CORREGO ALEGRE,      "+ellps=intl +towgs84=-206,172,-6,0,0,0,0"
+datum, COA,                 "+ellps=intl +towgs84=-206,172,-6,0,0,0,0"
+datum, COABR,               "+ellps=intl +towgs84=-206,172,-6,0,0,0,0"
+# http://spatialreference.org/ref/sr-org/7366/proj4/ -- not tested
+datum, SAD69,               "+ellps=aust_SA +towgs84=-67.35,3.88,-38.22,0,0,0,0"
+# http://epsg.io/4674, also http://www.ibge.gov.br/english/geociencias/geodesia/pmrg/faq.shtm#15 -- not tested
+datum, SIRGAS2000,          "+ellps=GRS80 +towgs84=0,0,0,0,0,0,0"
+
 
 # guess the datum by a comment/copyright string pattern
 datum_guess, "Croatia",            "+ellps=bessel +towgs84=550.499,164.116,475.142,5.80967,2.07902,-11.62386,0.99999445824",
@@ -35,5 +47,5 @@ proj, POLYCONIC,             "+proj=poly",PP:lon_0,"KNQ:P1:lon_0,P2:lat_0", # KN
 proj, SWEDISH GRID,          "+proj=tmerc +lon_0=15.808277777778 +x_0=1500000 +y_0=0",
 proj, LAMBERT CONFORMAL CONIC, "+proj=lcc",PP:lon_0,"KNQ:P1:lon_0,P2:lat_1,P3:lat_2",
 proj, LAMBERT AZIMUTHAL SPHERICAL, "+proj=laea",PP:lon_0,P1:lat_0,
-#proj, ALBERS SPHERICAL, "+proj=aea",PP:lon_0,P1:lat_0,P5:lat_1,P6:lat_2,
+proj, ALBERS SPHERICAL, "+proj=aea",PP:lon_0,P1:lat_0,P5:lat_1,P6:lat_2,
 #proj, WAGNER IV, "+proj=wag4",PP:lon_0,

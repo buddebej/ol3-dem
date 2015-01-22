@@ -152,7 +152,6 @@ class OziMap(SrcMap):
 # OziMap
 reader_class_map.append(OziMap)
 
-
 class OziLayer(SrcLayer):
 
     def hdr_parms(self, patt):

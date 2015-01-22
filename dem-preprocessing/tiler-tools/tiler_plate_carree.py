@@ -83,7 +83,7 @@ class PlateCarree(Pyramid):
     def write_metadata(self, tile=None, children=[]):
         super(PlateCarree, self).write_metadata(tile, children)
 
-        if not tile: # create top level kml
+        if tile is None: # create top level kml
             self.write_kml(os.path.basename(self.base), os.path.basename(self.base), self.kml_child_links(children))
             return
         # fill in kml templates
