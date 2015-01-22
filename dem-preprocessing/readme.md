@@ -1,6 +1,5 @@
 ##dem-preprocessing tools
 
-
 Both tile_border_neighbours.py and tile_colorencode.py are standalone tools and can be used independently. 
 
 You can use batch_dem2tiles.py as an interface to call all tools in their respective order.
@@ -13,13 +12,13 @@ Optionally you would need tar to create archives of the tilesets.
 
 To ensure that no artefacts occur during the resampling of the images the order of the workflow has to be:
 
-* tiler-tools (http://code.google.com/p/tilers-tools/, using version 3.2)
+* __tiler-tools__ (http://code.google.com/p/tilers-tools/ using version 3.2)
 (creates tif tiles of a dem in a gdal readable format)
 
-* tile_border_neighbours.py 
+* __tile_border_neighbours.py__ 
 (adjusts elevation values on tile borders with the help of neighbouring tiles to avoid rendering artefacts)
 
-* tile_colorencode.py
+* __tile_colorencode.py__
 (encodes up to Float32 values in tif and write into two 8 bit bands of a png)
 
 
