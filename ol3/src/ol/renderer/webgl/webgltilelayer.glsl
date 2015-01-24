@@ -134,9 +134,6 @@ uniform vec3 u_light;
 // intensity of ambient light
 uniform float u_ambient_light; 
 
-// number of vertices per edge
-uniform float u_meshResolution; 
-
 // flag for testing mode
 uniform bool u_testing; 
 
@@ -173,7 +170,7 @@ void main(void) {
 	vec3 currentV = vec3(m_texCoord.x*u_tileSizeM,(1.0 - m_texCoord.y)*u_tileSizeM,absElevation);
 
 
-// computation of hypsometric color
+    // computation of hypsometric color
 	// scaling of color ramp
 	float colorMin = u_colorScale.x/MAX_ELEVATION;
 	float colorMax = u_colorScale.y/MAX_ELEVATION;

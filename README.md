@@ -1,7 +1,7 @@
 ol3-dem
 =========
 
-This is an experimental fork of OpenLayers 3 to render digital elevation models using the integrated webgl functionality.
+This is an experimental fork of OpenLayers 3.1.1 to render digital elevation models using the integrated webgl functionality.
 The application is not running stable yet and serves only testing purposes. 
 
 For comments or contribution please contact [Cartography and Geovisualization Group, Oregon State University](http://cartography.oregonstate.edu/).
@@ -12,6 +12,14 @@ Features at current stage:
  * Hypsometric Tinting
  * Waterbody Detection
  * Hillshading
+
+Run the example with (a sample tileset will be add soon):
+
+```
+./build.py serve
+
+http://localhost:3000/examples/ol3dem.html
+```
 
 The input data has to be encoded and converted into a set of tiles before it can be read by ol3. Regular raster dems such as GeoTiff can be used.
 For data preprocessing we used [dem2tiles](https://github.com/buddebej/dem2tiles). For the actual tile production a modified version of [tiler-tools](https://code.google.com/p/tilers-tools/) was used.
