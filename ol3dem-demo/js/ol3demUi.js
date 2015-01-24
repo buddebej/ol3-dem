@@ -15,15 +15,13 @@
           'waterBodies' : true,
           'testing' : false,
           'colorScale' : [0, 3000],
-          'mapTexture' : false,          
           'maxElevation' : 4900,
-          'resolution' : 100,
+          'resolution' : 30,
           'hillShade' : true
       };
      
       dem.setObliqueInclination(ui.option.inclination);
       dem.setColorScale(ui.option.colorScale);
-      dem.setMapTexture(ui.option.mapTexture);
       dem.setLightAzimuth(ui.option.azimuth);
       dem.setLightZenith(ui.option.zenith);
       dem.setAmbientLight(ui.option.ambientLight / 100.0);
@@ -43,9 +41,7 @@
 
       // FIXME: Find proper way to trigger re-rendering of map.
       var renderMap = function() {
-        var center = view.getCenter();
-        view.setCenter([0, 0]);
-        view.setCenter(center);
+        dem.getSource().redraw();
       },
 
       // round given number to closest step
@@ -99,19 +95,6 @@
         'fgColor': '#888888',
         'change': function(v) {
           dem.setObliqueInclination(v);
-          renderMap();
-        }
-      });
-
-      // select texture
-      $('.selectTexture').change(function(){
-        if($('.selectTexture option:selected').val() === 'watercolorMap'){
-          dem.setMapTexture(true);
-          $('.colorControls').hide('blind', 300);
-          renderMap();
-        } else {
-          dem.setMapTexture(false);
-          $('.colorControls').show('blind', 300);          
           renderMap();
         }
       });
