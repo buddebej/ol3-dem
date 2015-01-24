@@ -13,7 +13,7 @@ Features at current stage:
  * Waterbody Detection
  * Hillshading
 
-Run the example with (a sample tileset will be add soon):
+Run the example with (a sample tileset will be added soon):
 
 ```
 ./build.py serve
